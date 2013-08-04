@@ -13,6 +13,8 @@
 
 
 2013AUG04
+* updated about - scenario, controller, operators, time, fog, analysis
+* screw markdown, remove ABOUT.md, convert to .txt
 * github remote add
 * wrote about cf ABOUT.md
 * created
