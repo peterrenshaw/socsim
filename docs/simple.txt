@@ -1,9 +1,0 @@
-A simple scenario
-
-
-
-
-
-
-
-# vim: ff=unix:ts=4:sw=4:tw=78:noai:expandtab

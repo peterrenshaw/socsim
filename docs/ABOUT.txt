@@ -37,7 +37,7 @@ media? Do you wait for a real event to happen to see what the response is? You
 could do this. What about creating an exercise that participants join in on
 and contribute in real time to solve a puzzle or problem?
 
-Here's a way this could work:
+How this might work:
 
 * A controller, a person or group of people decide to create a scenario to 
   test an idea. A time limit is set and the bounds of the idea to explore are noted.

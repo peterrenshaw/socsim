@@ -13,6 +13,13 @@
 
 
 2013AUG04
+* docs/simple.md
+- a quick decription of a scenario
+- how it's done on pen/paper & twitter
+- conducting experiments, what can you measure?
+- how to improve thru automat@n
+- sanity check
+
 * updated about - scenario, controller, operators, time, fog, analysis
 * screw markdown, remove ABOUT.md, convert to .txt
 * github remote add
