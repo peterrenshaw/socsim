@@ -5,7 +5,7 @@
   /____/ \____/ \___/ /____//_//_/ /_/ /_/ [1] 
 
 
-  name readme.md
+  name ABOUT.md
   date 2013AUG04
   prog @peterrenshaw
   desc SOCSIM: A simulation tool for social media to test against.
@@ -19,8 +19,8 @@ audience using twitter as a communications tool to send and receive.
 
 = Why?
 
-The idea behind SOCSIM is to be able to use a simple tool to test 
-ideas against users in the social media sphere as a controlled experiment. 
+The idea behind SOCSIM is to be able to use a simple tool to test ideas 
+against users in the social media sphere as a controlled experiment. 
 
 
 = What it is not

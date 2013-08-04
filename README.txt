@@ -6,13 +6,14 @@
 
 
 
-  name readme.md
+  name readme.txt
   date 2013AUG04
   prog @peterrenshaw
   desc SOCSIM: A simulation tool for social media to test against.
 
 
 2013AUG04
+* github remote add
 * wrote about cf ABOUT.md
 * created
 
