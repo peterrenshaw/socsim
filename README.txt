@@ -11,6 +11,9 @@
   prog @peterrenshaw
   desc SOCSIM: A simulation tool for social media to test against.
 
+2013AUG05
+* docs/testing.md
+- quick ideas on what to test on responses
 
 2013AUG04
 * docs/simple.md
