@@ -1,8 +1,7 @@
 # A simple scenario
 
     describe a simple scenario & propose how this might be dealt with online
-
-It's summer. 
+ 
 
 
 
