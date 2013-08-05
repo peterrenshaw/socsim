@@ -20,9 +20,9 @@ Independent of scenario messaging is the idea of testing messages received.
 The idea is to put a number or value to a response or set of responses.
 
 
-    "There are still ways to handle the test scenario, 
+    *"There are still ways to handle the test scenario, 
     good way of evaluating skillsets for sourcing accurate, timely
-    information." [1]
+    information."* [0]
     
 
 Some simple things that I'd like to be able to test:
@@ -30,7 +30,6 @@ Some simple things that I'd like to be able to test:
 ### Time 
 
 * Q What is the time taken for any message to be posted once controller has issued a message
- 
 * Q What is the frequency of messages with known workload over given exercise 
 
 
@@ -39,7 +38,6 @@ Some simple things that I'd like to be able to test:
 Count instances of some variable to be tested. Result is an integer.
 
 * Q: How many times is the same message repeated?
-
 * Q: How many URL's are posted?
 
 
@@ -47,12 +45,15 @@ Count instances of some variable to be tested. Result is an integer.
 
 Test the truth of a variable. Results in True or False.
 
-* Q: are resouces shown still relevant?
+* Q: Are resouces shown still relevant?
 
-    "some resources from 4 years ago changed or not 
-    available, so updating latest resources comes into play." [1]
+
+    *"some resources from 4 years ago changed or not available, 
+    so updating latest resources comes into play."* [1]
     
-* Q: able to use URL posted?
+
+* Q: URL posted valid?
+* Q: URL posted current?
 
 
 ### Collection
