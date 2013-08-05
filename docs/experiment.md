@@ -66,14 +66,14 @@ A collection could represent different parts that make up a message.
 
 ## Resources
 
-[0]: **[@geehall1](https://twitter.com/geehall1)**
+[0] [@geehall1](https://twitter.com/geehall1)
 <https://twitter.com/geehall1/status/364146712455024640>
 
 [1] A scenario is made up of a series of events. A checkpoint is an event 
 that we have some particular interest in. We might want to measure the time
 between an important bit of information was transmitted and received.
 
-[2]: **@geehall1**
+[2] @geehall1
 <https://twitter.com/geehall1/status/364146230932152320>
 
 
