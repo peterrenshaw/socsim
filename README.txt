@@ -11,7 +11,13 @@
   prog @peterrenshaw
   desc SOCSIM: A simulation tool for social media to test against.
 
+
 2013AUG05
+* docs/resources.md
+- quick exploration on how/why u might store critical data
+- make distinction between human/machine readable format
+- storage, resource types, access & distribution
+
 * docs/testing.md
 - quick ideas on what to test on responses
 
