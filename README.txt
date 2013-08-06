@@ -12,6 +12,10 @@
   desc SOCSIM: A simulation tool for social media to test against.
 
 
+2013AUG06
+* todo
+- added 
+
 2013AUG05
 * docs/resources.md
 - quick exploration on how/why u might store critical data
