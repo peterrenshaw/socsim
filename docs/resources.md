@@ -39,6 +39,7 @@ desirable things:
 * OSOM (one source, one message)
   - one version of the information that is correct
 
+
 ### Metadata
 
     Store the history and description of data
