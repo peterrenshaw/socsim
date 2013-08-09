@@ -25,6 +25,7 @@
 # desc: tools to build, manipulate python data
 #       convert data to json, save
 #       read, convert json to python
+# copy: copyright (C) 2013 Peter Renshaw
 #===
 
 

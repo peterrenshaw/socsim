@@ -18,6 +18,10 @@
     along with SOCSIM.  If not, see <http://www.gnu.org/licenses/>.
 """
 
+#---
+# copy: copyright (C) 2013 Peter Renshaw
+#---
+
 import unittest
 
 
