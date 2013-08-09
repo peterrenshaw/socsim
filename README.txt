@@ -12,6 +12,9 @@
   desc SOCSIM: A simulation tool for social media to test against.
 
 
+2013AUG09
+* added record code to play with
+
 2013AUG06
 * todo
 - added 
