@@ -1,0 +1,116 @@
+[
+    {
+        "key": "title",
+        "value": "bigblock"
+    },
+    {
+        "key": "description",
+        "value": "This is block is combined with A, B, C"
+    },
+    {
+        "key": "created",
+        "value": "2013AUG0914:54"
+    },
+    {
+        "deleted": false,
+        "key": "A",
+        "value": [
+            {
+                "key": "title",
+                "value": "A"
+            },
+            {
+                "key": "description",
+                "value": "This is the A meta block"
+            },
+            {
+                "key": "created",
+                "value": "2013AUG0914:54"
+            },
+            {
+                "key": "colour",
+                "value": "red"
+            },
+            {
+                "key": "size",
+                "value": 2
+            },
+            {
+                "key": "weight",
+                "value": 10
+            },
+            {
+                "key": "format",
+                "value": "2x2"
+            }
+        ]
+    },
+    {
+        "deleted": false,
+        "key": "B",
+        "value": [
+            {
+                "key": "title",
+                "value": "B"
+            },
+            {
+                "key": "description",
+                "value": "This is the B meta block"
+            },
+            {
+                "key": "created",
+                "value": "2013AUG0914:54"
+            },
+            {
+                "key": "colour",
+                "value": "yellow"
+            },
+            {
+                "key": "size",
+                "value": 4
+            },
+            {
+                "key": "weight",
+                "value": 20
+            },
+            {
+                "key": "format",
+                "value": "2x4"
+            }
+        ]
+    },
+    {
+        "deleted": false,
+        "key": "C",
+        "value": [
+            {
+                "key": "title",
+                "value": "C"
+            },
+            {
+                "key": "description",
+                "value": "This is the C meta block"
+            },
+            {
+                "key": "created",
+                "value": "2013AUG0914:54"
+            },
+            {
+                "key": "colour",
+                "value": "blue"
+            },
+            {
+                "key": "size",
+                "value": 1
+            },
+            {
+                "key": "weight",
+                "value": 10
+            },
+            {
+                "key": "format",
+                "value": "1x1"
+            }
+        ]
+    }
+]
