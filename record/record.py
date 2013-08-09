@@ -2,12 +2,24 @@
 # ~*~ encoding: utf-8 ~*~
 
 
+#===
+# name: record.py
+# date: 2013AUG09
+# prog: pr
+# desc: tools to build, manipulate python data
+#       convert data to json, save
+#       read, convert json to python
+#===
+
+
 import json
 import time
 import os.path
 
 
 #--- tools ---
+# TODO not tested
+#
 def save(filepathname, data):
     """save a file to filesystem"""
     filepath = os.path.dirname(filepathname)
@@ -94,7 +106,7 @@ class Meta:
         self.add('title', self.title)
         self.add('description', self.description)
         # uppercase, want Aug as AUG
-        self.add('created', time.strftime("%Y%b%d%H:%M").upper())
+        self.add('created', time.strftime("%Y%b%d%H%M.%S").upper())
     def all(self):
         """if something in store, return else False"""
         if self.store:
@@ -149,6 +161,8 @@ class Record:
                 return True
         return False
     # --- search ---
+    # TODO not tested
+    #
     def __search_all(self, key, get_index=False, get_item=False):
         """find if key in store[name], T/F, opt return index or item"""
         if key:

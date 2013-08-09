@@ -5,6 +5,12 @@
 
 
 2013AUG09
+* couple of changes
+- blocks.py
++ example code
+- record.py
++ comment blocks added
+
 * idea: like most ideas they take time to develop. This is how the idea stands as of now:
 - we have blocks of metadata and a record block.
 - a Record block contains a list of key/value pairs

@@ -5,11 +5,27 @@
     },
     {
         "key": "description",
-        "value": "This is block is combined with A, B, C"
+        "value": "This is block is combined with A, B, C. Details to be calculated"
     },
     {
         "key": "created",
-        "value": "2013AUG0914:54"
+        "value": "2013AUG091721.57"
+    },
+    {
+        "key": "color",
+        "value": "unknown"
+    },
+    {
+        "key": "size",
+        "value": 0
+    },
+    {
+        "key": "weight",
+        "value": 0
+    },
+    {
+        "key": "format",
+        "value": "unknown"
     },
     {
         "deleted": false,
@@ -25,7 +41,7 @@
             },
             {
                 "key": "created",
-                "value": "2013AUG0914:54"
+                "value": "2013AUG091721.57"
             },
             {
                 "key": "colour",
@@ -59,7 +75,7 @@
             },
             {
                 "key": "created",
-                "value": "2013AUG0914:54"
+                "value": "2013AUG091721.57"
             },
             {
                 "key": "colour",
@@ -93,7 +109,7 @@
             },
             {
                 "key": "created",
-                "value": "2013AUG0914:54"
+                "value": "2013AUG091721.57"
             },
             {
                 "key": "colour",

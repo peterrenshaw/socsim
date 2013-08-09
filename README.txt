@@ -13,6 +13,12 @@
 
 
 2013AUG09
+* couple of changes
+- record/blocks.py
++ example code
+- record/record.py
++ comment blocks added
+
 * added record code to play with
 
 2013AUG06

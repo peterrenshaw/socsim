@@ -2,6 +2,14 @@
 # ~*~ encoding: utf-8 ~*~
 
 
+#===
+# name blocks.py
+# date: 2013AUG09
+# prog: pr
+# desc: explanation accompanying ABOUT.txt
+#       shows in code *some* things you can do at the moment with record
+#===
+
 import sys
 from optparse import OptionParser
 
@@ -28,8 +36,6 @@ def main():
         print("%s v%s %s %s" % ('blocks', '0.0.1', '2013AUG09', '(C) 2013'))
         sys.exit(0)
     elif options.title and options.description:
-        description = record.Meta("bigblock", "This is block is combined with A, B, C")
-        
         meta_a = record.Meta("A", "This is the A meta block")
         meta_a.add("colour", "red")
         meta_a.add("size", 2)
@@ -43,12 +49,16 @@ def main():
         meta_b.add("format", "2x4")        
 
         meta_c = record.Meta("C", "This is the C meta block")
-        meta_c = record.Meta("C", "This is the C meta block")
         meta_c.add("colour", "blue")
         meta_c.add("size", 1)
         meta_c.add("weight", 10)
         meta_c.add("format", "1x1")
 
+        description = record.Meta("bigblock", "This is block is combined with A, B, C. Details to be calculated")
+        description.add("color", "unknown")
+        description.add("size", 0)
+        description.add("weight", 0)
+        description.add("format","unknown")
         blocks = record.Record(description.all())
         blocks.add('A', meta_a.all())
         blocks.add('B', meta_b.all())
