@@ -12,9 +12,16 @@
   desc SOCSIM: A simulation tool for social media to test against.
 
 
+2013AUG09
+* [] work on record/Record search
+* [] example with cli input to build,save
+* [] read existing file, edit
+* [] build better version in JavaScript
+* [] create html interface using Angular
+
 2013AUG06
-* [] look at wikis that don't use RMDB for storage
-* [] converter code JSON <=> python => formats
+* [x] look at wikis that don't use RMDB for storage
+* [x] converter code JSON <=> python => formats
 * [] think how could have output via html page + JavaScript 
      converting JSON to html page
 

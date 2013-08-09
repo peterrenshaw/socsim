@@ -13,6 +13,7 @@
 
 
 2013AUG09
+* record/
 * couple of changes
 - record/blocks.py
 + example code
