@@ -13,6 +13,8 @@
 
 
 2013AUG09
+* added license
+- <https://www.gnu.org/licenses/gpl-3.0.txt>
 * record/
 * couple of changes
 - record/blocks.py

@@ -13,11 +13,15 @@
 
 
 2013AUG09
+* [] complete testing against record/record.py
 * [] work on record/Record search
 * [] example with cli input to build,save
 * [] read existing file, edit
 * [] build better version in JavaScript
 * [] create html interface using Angular
+* [x] add license
+- <https://www.gnu.org/licenses/gpl-3.0.txt>
+
 
 2013AUG06
 * [x] look at wikis that don't use RMDB for storage
