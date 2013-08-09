@@ -25,7 +25,7 @@ def main():
 
 
     if options.version:
-        print("%s v%s %s %s" % ('smem-url', '0.0.1', '2013AUG09', '(C) 2013'))
+        print("%s v%s %s %s" % ('blocks', '0.0.1', '2013AUG09', '(C) 2013'))
         sys.exit(0)
     elif options.title and options.description:
         description = record.Meta("bigblock", "This is block is combined with A, B, C")
