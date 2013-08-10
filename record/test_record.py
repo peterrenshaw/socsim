@@ -78,7 +78,101 @@ class TestRecord(unittest.TestCase):
         self.assertFalse(self.r.add('key', ''))
 
     # search
-
+    def test_search_key_ok(self):
+        """pass in known key, return results"""
+        key = "everybodyknows"
+        self.r.add(key, "this is nowhere")
+        self.assertTrue(self.r.search(key))
+    def test_search_empty_key_fail(self):
+        """empty key for search should fail"""
+        key = "everybodyknows"
+        self.r.add(key, "this is nowhere")
+        self.assertFalse(self.r.search(""))
+    def test_search_nothing_found_fail(self):
+        """valid key but nothing found, fails"""
+        self.r.add("smalltown", "never put her roots down")
+        key = "diner"
+        self.assertFalse(self.r.search(key))
+    # search item
+    def test_search_item_by_key_ok(self):
+        """seach by key for item, ok"""
+        key = "unknownlegend"
+        self.r.add(key, "unknown legend in her own time")
+        result = {'deleted': False, 
+                  'value': 'unknown legend in her own time', 
+                  'key': 'unknownlegend'}
+        #print(self.r.search_item(key))
+        self.assertEqual(self.r.search_item(key), result)
+    def test_search_item_by_empty_key_fail(self):
+        """search by empty key, fail"""
+        key = "unknownlegend"
+        self.r.add(key, "unknown legend in her own time")
+        self.assertFalse(self.r.search_item(""))
+    def test_search_item_by_key_no_result_fail(self):
+        """search by key, not found, fail"""
+        key = "unknown"
+        self.r.add("unknownlegend", "unknown legend in her own time")
+        self.assertFalse(self.r.search(key))
+    # search value
+    def test_search_value_by_key_ok(self):
+        """search by key, result ok"""
+        key = "unknownlegend"
+        value = "unknown legend in her own time"
+        self.assertTrue(self.r.add(key, value))
+        self.assertEqual(value, self.r.search_value(key))
+    def test_search_value_by_key_fail(self):
+        """search by key, result not found, fail"""
+        key = "unknownlegend"
+        value = "unknown legend in her own time"
+        self.assertTrue(self.r.add(key, value))
+        self.assertFalse(self.r.search_value("legend"))
+    def test_search_value_empty_key_fail(self):
+        """search by empty key, fail"""
+        key = "unknownlegend"
+        value = "unknown legend in her own time"
+        self.assertTrue(self.r.add(key, value))
+        self.assertFalse(self.r.search_value(""))
+    def test_search_value_not_found_fail(self):
+        """search by key, not found, fail"""
+        key = "unknownlegend"
+        value = "unknown legend in her own time"
+        self.assertTrue(self.r.add(key, value))
+        self.assertFalse(self.r.search_value("legend"))
+    # search index
+    def test_search_index_by_key_ok(self):
+        """search by valid key, index found, pass"""
+        key = "unknownlegend"
+        self.assertTrue(self.r.add(key, "unknown legend in her own time"))
+        self.assertTrue(self.r.add("walkon", "I remember the good old days / stayed up all night"))
+        self.assertTrue(self.r.add("winterlong", "I waited for you winterlong / you seem to be where I belong"))
+        #print(self.r.search_index(key))
+        self.assertTrue(self.r.search_index(key))
+        self.assertEqual(3, self.r.search_index(key))
+    def test_search_index_by_empty_key_fail(self):
+        """search by empty key, fail"""
+        key = "unknownlegend"
+        self.assertTrue(self.r.add(key, "unknown legend in her own time"))
+        self.assertFalse(self.r.search_index(""))
+    def test_search_index_by_key_not_found_fail(self):
+        """search index by key, no result, fail"""
+        key = "unknown"
+        self.assertTrue(self.r.add("unknownlegend", "unknown legend in her own time"))
+        self.assertTrue(self.r.add("walkon", "I remember the good old days / stayed up all night"))
+        self.assertTrue(self.r.add("winterlong", "I waited for you winterlong / you seem to be where I belong"))
+        self.assertFalse(self.r.search_index(key))
+    # all
+    def test_all_ok(self):
+        """return all, ok"""
+        self.assertTrue(self.r.add("unknownlegend", "unknown legend in her own time"))
+        self.assertTrue(self.r.add("walkon", "I remember the good old days / stayed up all night"))
+        self.assertTrue(self.r.add("winterlong", "I waited for you winterlong / you seem to be where I belong"))
+        self.assertTrue(self.r.all())
+    def test_all_no_adds_ok(self):
+        """no add's, return metadata, nothing else"""
+        self.assertTrue(self.r.all())
+        metadata_keys = ['title','description','created']
+        for item in self.r.all():
+            self.assertTrue(item['key'] in metadata_keys)
 
 
 #---
@@ -93,7 +187,22 @@ def suite():
              'test_add_bulk_fail',
              'test_add_no_data_fail',
              'test_add_no_key_yes_value_fail',
-             'test_add_yes_key_no_value_fail']
+             'test_add_yes_key_no_value_fail',
+             'test_search_key_ok',
+             'test_search_empty_key_fail',
+             'test_search_nothing_found_fail',
+             'test_search_item_by_key_ok',
+             'test_search_item_by_empty_key_fail',
+             'test_search_item_by_key_no_result_fail',
+             'test_search_value_by_key_ok',
+             'test_search_value_by_key_fail',
+             'test_search_value_empty_key_fail',
+             'test_search_value_not_found_fail',
+             'test_search_index_by_key_ok',
+             'test_search_index_by_empty_key_fail',
+             'test_search_index_by_key_not_found_fail',
+             'test_all_ok',
+             'test_all_no_adds_ok']
 
     return unittest.TestSuite(map(TestRecord, tests))
 

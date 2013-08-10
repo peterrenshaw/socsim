@@ -211,10 +211,7 @@ class Record:
     # --- get ---
     def all(self):
         """return all in store as py stucture"""
-        if self.store:
-            return self.store
-        else:
-            return False
+        return self.store # no adds, still have meta
 
 
 def main():

@@ -12,13 +12,15 @@
   desc SOCSIM: A simulation tool for social media to test against.
 
 
-2013AUG09
+2013AUG10
 * [] complete testing against record/record.py
 * [] work on record/Record search
 * [] example with cli input to build,save
 * [] read existing file, edit
 * [] build better version in JavaScript
 * [] create html interface using Angular
+
+2013AUG09
 * [x] add license
 - <https://www.gnu.org/licenses/gpl-3.0.txt>
 
@@ -26,8 +28,6 @@
 2013AUG06
 * [x] look at wikis that don't use RMDB for storage
 * [x] converter code JSON <=> python => formats
-* [] think how could have output via html page + JavaScript 
-     converting JSON to html page
 
 
 [1] Title created with an ASCII text generator using 'slant' and 'stretch=Yes". 
