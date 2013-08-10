@@ -14,7 +14,7 @@
 
 2013AUG10
 * [] complete testing against record/record.py
-* [] work on record/Record search
+* [x] work on record/Record search
 * [] example with cli input to build,save
 * [] read existing file, edit
 * [] build better version in JavaScript

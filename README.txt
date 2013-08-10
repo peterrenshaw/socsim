@@ -11,6 +11,9 @@
   prog @peterrenshaw
   desc SOCSIM: A simulation tool for social media to test against.
 
+2013AUG10
+* testing
+- record.Record() done
 
 2013AUG09
 * added license
