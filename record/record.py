@@ -86,8 +86,10 @@ class Meta:
         self.title = title
         self.description = description
         self.store = []
+        self.created_time_format = "%Y%b%d%H%M.%S" # definable
         self.__add_default()
     def new(self, title, description):
+        """new Meta object from scratch"""
         if title != "" and description != "": 
             self.store = []
             self.title = title
@@ -113,23 +115,20 @@ class Meta:
         no dupes allowed,
         unique key names enforced
         """
-        if 'key' in data.keys():
+        if 'key' and 'value' in data.keys():
             if not self.search(data['key']):
                 self.store.append(data)
                 return True
         return False
-    def __add_default(self):
+    def __add_default(self, strf_time_format="%Y%b%d%H%M.%S"):
         """private, adds all metadata to store"""
         self.add('title', self.title)
         self.add('description', self.description)
         # uppercase, want Aug as AUG
-        self.add('created', time.strftime("%Y%b%d%H%M.%S").upper())
+        self.add('created', time.strftime(strf_time_format).upper())
     def all(self):
-        """if something in store, return else False"""
-        if self.store:
-            return self.store
-        else:
-            return False
+        """always something in self.store, just return it"""
+        return self.store
 
 
 #---

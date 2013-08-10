@@ -88,7 +88,12 @@ class TestMeta(unittest.TestCase):
         
         status = title and description and created and name2
         self.assertTrue(status)
-
+    def test_all_key_no_add_ok(self):
+        """add nothing, still get Meta default"""
+        self.assertTrue(self.m.all())
+        metadata_keys = ['title','description','created']
+        for item in self.m.all():
+            self.assertTrue(item['key'] in metadata_keys)
 
 #---
 # suite: allows all tests run here to be run externally at 'test_all.py'
@@ -101,7 +106,8 @@ def suite():
              'test_add_no_spaces_key',
              'test_search_ok',
              'test_search_fail',
-             'test_all_key_ok']
+             'test_all_key_ok',
+             'test_all_key_no_add_ok']
 
     return unittest.TestSuite(map(TestMeta, tests))
 
