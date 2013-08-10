@@ -28,6 +28,7 @@ import unittest
 import record
 import test_meta
 import test_record
+import test_tools
 
 #---
 # suite: allows all tests run here to be run externally at 'test_all.py'
@@ -37,10 +38,12 @@ def main():
     # add all new test suites per test module here
     suite_meta = test_meta.suite()
     suite_record = test_record.suite()
+    suite_tools = test_tools.suite()
 
     # add the suite to be tested here
     alltests = unittest.TestSuite((suite_meta, 
-                                   suite_record)) 
+                                   suite_record,
+                                   suite_tools)) 
     # run the suite
     runner = unittest.TextTestRunner()
     runner.run(alltests)

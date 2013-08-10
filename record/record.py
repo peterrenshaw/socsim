@@ -35,7 +35,7 @@ import os.path
 
 
 #--- tools ---
-# TODO not tested
+# some testing
 #
 def save(filepathname, data):
     """save a file to filesystem"""
@@ -94,7 +94,7 @@ class Meta:
             self.store = []
             self.title = title
             self.description = description
-            self.__add_default()
+            self.__add_default()  # TODO definable strf_time_format?
             return True
         else:
             return False
@@ -102,7 +102,7 @@ class Meta:
         """search for (key) name in store, found is T, non, F"""
         if key:
             for item in self.store:
-                if item['key'] == key: 
+                if item['key'] == key:
                     return True
         return False
     def add(self, name, value):
@@ -177,8 +177,6 @@ class Record:
                 return True
         return False
     # --- search ---
-    # TODO not tested
-    #
     def __search_all(self, key, get_index=False, get_item=False):
         """find if key in store[name], T/F, opt return index or item"""
         if key:
@@ -215,6 +213,7 @@ class Record:
 
 def main():
     pass
+
 
 if __name__ == "__main__":
     main()

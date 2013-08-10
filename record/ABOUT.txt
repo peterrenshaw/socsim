@@ -10,6 +10,17 @@
     prog: pr
     desc: description of ideas to build record
 
+2013AUG10
+* record.Meta
+- basic testing against record/record.py
++ added record/test_tools.py
++ ammeded record/test_all.py
+- all: fixes
+- __add_default: added time format string setting
+* testing
+- record.Meta
++ fixes
+- record.Record() done
 
 2013AUG09
 * added license
