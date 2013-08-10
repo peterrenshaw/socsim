@@ -12,7 +12,12 @@
   desc SOCSIM: A simulation tool for social media to test against.
 
 2013AUG10
+* record.Meta
+- all: fixes
+- __add_default: added time format string setting
 * testing
+- record.Meta
++ fixes
 - record.Record() done
 
 2013AUG09
