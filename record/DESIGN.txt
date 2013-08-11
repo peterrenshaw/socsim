@@ -1,0 +1,86 @@
+                                _          
+     _____ ____   _____  _____ (_)____ ___ 
+    / ___// __ \ / ___/ / ___// // __ `__ \
+   (__  )/ /_/ // /__  (__  )/ // / / / / /
+  /____/ \____/ \___/ /____//_//_/ /_/ /_/ [1]
+
+
+    name: DESIGN.txt
+    date: 2013AUG10
+    prog: pr
+    desc: design of ideas to build record
+
+
+abstract
+
+    thinking into building info input, manuip and display
+    modules for data
+
+read
+* HACK_INI.txt
+
+
+questions
+
+* should blocks be built from files or interactive?
+- import from file & modify interactive?
+* how should important data be entered?
+- files
+- interactive
+- online?
+* how do you group data?
+- files
+- online?
+* what period of validation should happen?
+- what mechanism should be used?
+* reports
+- how to show as dashboard?
+* display
+- formats
+- devices
+
+
+files
+* ini file format
+- require a format that is easy, intuitive and quick
+  to enter, edit data
+- <http://docs.python.org/3/library/configparser.html#supported-ini-file-structure>
+
+
+outline
+
+    build a quick tool to
+
+* identify user
+- name
+- email address
+* updated
+- created
+- updated
+* enter important data
+- URL
+- title
+- description
+- why included
+* group important data
+- organisation
+- function
+- date
+* validate
+- check quality of url
+- check url status (200)
+- rank 
+* report
+- spit out data into JSON file
+* display
+- show important information, human readable
+- read JSON file & display
+
+
+[1] Title created with an ASCII text generator using 'slant' and 'stretch=Yes". 
+The code is based on Figlet which can be found here ~ <http://www.figlet.org/>
+[Last accessed: Sunday 4th August, 2013]
+<http://www.network-science.de/ascii/>
+
+
+vim: ff=unix:ts=4:sw=4:tw=78:noai:expandtab
