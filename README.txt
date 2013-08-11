@@ -11,8 +11,22 @@
   prog @peterrenshaw
   desc SOCSIM: A simulation tool for social media to test against.
 
+
+2013AUG11
+* added HACK_INI.txt
+- describes how .ini files are used
+* added hack_read_ini.py
+- quick, untested hack to see how configparser works
+  and how this might be used to read .ini files
+- idenified problems with python versions
+- no real code yet, just a hack to see where to 
+  go next.
+
 2013AUG10
 * record.Meta
+- basic testing against record/record.py
++ added record/test_tools.py
++ ammeded record/test_all.py
 - all: fixes
 - __add_default: added time format string setting
 * testing

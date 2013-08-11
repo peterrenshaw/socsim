@@ -12,13 +12,16 @@
   desc SOCSIM: A simulation tool for social media to test against.
 
 
-2013AUG10
-* [] complete testing against record/record.py
-* [x] work on record/Record search
-* [] example with cli input to build,save
-* [] read existing file, edit
+2013AUG11
+* [x] example with cli input to build, save (.ini)
+* [x] read existing file, edit (.ini)
 * [] build better version in JavaScript
 * [] create html interface using Angular
+
+2013AUG10
+* [x] complete testing against record/record.py
+* [x] basic testing against record/record.py
+* [x] work on record/Record search
 
 2013AUG09
 * [x] add license

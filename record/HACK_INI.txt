@@ -1,0 +1,146 @@
+                                _          
+     _____ ____   _____  _____ (_)____ ___ 
+    / ___// __ \ / ___/ / ___// // __ `__ \
+   (__  )/ /_/ // /__  (__  )/ // / / / / /
+  /____/ \____/ \___/ /____//_//_/ /_/ /_/ [1]
+
+
+    name: HACK_INI.txt
+    date: 2013AUG11
+    prog: pr
+    desc: design of ideas to build record
+          using an .ini file to create blocks
+
+
+abstract
+
+    thinking into building info input, manip and display
+    modules for data. In this case use .ini files for easy
+    to understand creation & editing.
+
+    Read the DESIGN.txt file to see the original ideas.
+
+
+Todays hack was a bastard. Python configparser looks on the surface simple. You have a file
+format that is familiar to anyone who's used windows .ini files. However that's where it ends
+being simple. The python docs are descriptive but lack clear examples. Lots of time wasting 
+ensured.
+
+The idea is simple, let users describe a document as such:
+
+     * the FILENAME for the .ini file is the document name
+
+     * each SECTION name dscribes a meta block
+
+     * each SECTION is made up of KEY, VALUE pairs
+
+A simple example is something like this can be found in 
+contact.ini:
+
+    contact.ini (filename is document name)
+
+    [peterrenshaw]  (section)
+    name = Peter Renshaw
+    email = goonmail@netspace.net.au
+    twitter = @peterrenshaw
+    nick = pr
+    (key)  (value)
+
+You could for instance add many people to a file called contact. So the code
+should now be able to read each section and extract the key/value pairs for 
+each section. That's the idea.
+
+The reality was complicated by the fact python changed the way configparser
+works between versions 2 and 3. This meant a few hacks. The code should work
+with most versions of python. It works on Python 
+
+      python 2: 20703c2 
+      python 3: 30203f0
+
+For the moment this will do. Obviously more has to be done. Now back to an 
+example. Say you want to quickly code up a file of URLs. How would you do 
+this? Well this is how I did it:
+
+    url.ini (filename is document name)
+
+    [meta]
+    url = meta.ini
+    user = system
+    function = meta
+    date = 2013AUG10
+    prog = pr
+    desc = most commonly used online sites that I use.
+
+    [seldomlogical]
+    url = seldomlogical.com
+    user = peterrenshaw
+    function = blog
+    started = 2008
+    status = current
+    description = new ideas, ideal solutions are seldom logical. 
+                  attaining a desired goal always is
+
+    [twitter]
+    url = twitter.com
+    user = @peterrenshaw
+    function = contact
+    started = 2006
+    status = current
+    description = Another Scrappy Startup ☮ ♥ ♬ ⌨ 
+                  melbourne, australia · seldomlogical.com
+    
+
+Now if you run the code you get: 
+
+    python hack_read_ini.py -s urls.ini      OR
+    python3 hack_read_ini.py -s urls.ini
+
+    0 meta
+	url=meta.ini
+	user=system
+	function=meta
+	date=2013AUG10
+	prog=pr
+	desc=most commonly used online sites that I use.
+    1 seldomlogical
+	url=seldomlogical.com
+	user=peterrenshaw
+	function=blog
+	started=2008
+	status=current
+	description=new ideas, ideal solutions are seldom logical.
+                    attaining a desired goal always is
+    2 twitter
+	url=twitter.com
+	user=@peterrenshaw
+	function=contact
+	started=2006
+	status=current
+	description=Another Scrappy Startup ☮ ♥ ♬ ⌨
+                    melbourne, australia · seldomlogical.com
+
+
+The data has been successfully extract. What does this mean? Well it means you can 
+create a text file describing a document, run some code over it and extract the data.
+This means it's possible to now use this data to generate meta blocks and a record 
+block describing this file.
+
+
+The tool chain works something like this:
+
+    a) create document, url.ini
+    b) run read_ini passing the filename 
+    c) the output is used to create meta and record blocks using record.Meta and 
+       record.Record 
+    e) generate JSON code of record.
+
+That's it today.
+
+
+[1] Title created with an ASCII text generator using 'slant' and 'stretch=Yes". 
+The code is based on Figlet which can be found here ~ <http://www.figlet.org/>
+[Last accessed: Sunday 4th August, 2013]
+<http://www.network-science.de/ascii/>
+
+
+vim: ff=unix:ts=4:sw=4:tw=78:noai:expandtab
