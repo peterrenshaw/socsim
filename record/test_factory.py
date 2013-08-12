@@ -22,43 +22,40 @@
 # copy: copyright (C) 2013 Peter Renshaw
 #---
 
+
+import json
+import os.path
 import unittest
 
 
-import record
-import test_meta
-import test_record
-import test_tools
-import test_delivery
-import test_factory
+import factory
+
+
+class TestFactory(unittest.TestCase):
+    def setUp(self):
+        pass
+    def tearDown(self):
+        pass
+
+    # new
+    def test_new_ok(self):
+        """ add new name & desc, return T"""
+        pass
 
 
 #---
 # suite: allows all tests run here to be run externally at 'test_all.py'
 #---
-def main():
+def suite():
     """tests added to run in 'test_all.py'"""
-    # add all new test suites per test module here
-    suite_meta = test_meta.suite()
-    suite_record = test_record.suite()
-    suite_tools = test_tools.suite()
-    suite_delivery = test_delivery.suite()
-    suite_factory = test_factory.suite()
+    tests = ['test_new_ok']
 
-    # add the suite to be tested here
-    alltests = unittest.TestSuite((suite_meta, 
-                                   suite_record,
-                                   suite_tools,
-                                   suite_delivery,
-                                   suite_factory))
-
-    # run the suite
-    runner = unittest.TextTestRunner()
-    runner.run(alltests)
+    return unittest.TestSuite(map(TestFactory, tests))
 
 
 if __name__ == "__main__":
-    main()
+    suite()
+    unittest.main()
 
 
 # vim: ff=unix:ts=4:sw=4:tw=78:noai:expandtab

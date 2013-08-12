@@ -2,21 +2,31 @@
      _____ ____   _____  _____ (_)____ ___ 
     / ___// __ \ / ___/ / ___// // __ `__ \
    (__  )/ /_/ // /__  (__  )/ // / / / / /
-  /____/ \____/ \___/ /____//_//_/ /_/ /_/ [1] 
-
+  /____/ \____/ \___/ /____//_//_/ /_/ /_/ [1]
 
 
   name todo.txt
   date 2013AUG06
   prog @peterrenshaw
-  desc SOCSIM: A simulation tool for social media to test against.
+  desc SOCSIM: A scenario simulation tool for social media.
+
+
+2013AUG12
+* [] py install script
+* [] build factory, ini & test code
+- factory.Factory
+- factory.Load
+- test_factory
+- test_load
+* [] fix hacked code
+* [] write story on factory process, ini->JSON
+* [] build better version in JavaScript
+* [] create html interface using Angular
 
 
 2013AUG11
 * [x] example with cli input to build, save (.ini)
 * [x] read existing file, edit (.ini)
-* [] build better version in JavaScript
-* [] create html interface using Angular
 
 2013AUG10
 * [x] complete testing against record/record.py
