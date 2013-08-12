@@ -31,19 +31,26 @@
 
 import sys
 
+
 # --- HACK ALERT --- 
 # hex_version: which version of py are we using?
 def hex_version():
     """python version in hex"""
     return '%x' % sys.hexversion
-if hex_version() < '30203f0':
-    # py 2
-    import ConfigParser
-    config = ConfigParser.ConfigParser()
-else:
-    # py 3
+pyhv = hex_version()
+if pyhv >= "30000f0":
+    # py3
     import configparser
     config = configparser.ConfigParser()
+elif pyhv > "20000f0":
+    # py2 
+    import configparser
+    config = ConfigParser.ConfigParser()
+else: 
+    # less than py2
+    print("error: python version not able to support this code")
+    print("version: <%s>" % pyhv)
+    sys.exit(1)
 # ---
 
 
