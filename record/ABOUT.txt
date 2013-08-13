@@ -11,6 +11,33 @@
     desc: description of ideas to build record
 
 
+2013AUG13
+* record/factory.py
+- added
++ factory.Ini
++ empty.ini
++ contact.ini
++ urls.ini
+
+* work on factory.Ini allows to specificy blocks
+  as .ini files on system. Read them & then push
+  thu work chain
+ 
+    file.ini <- factory.Ini.read()
+    factory.Ini.all() -> factory.Delivery
+ 
+    Delivery.Meta for blocks
+    Delivery.Record as container for blocks
+
+* record/test_ini.py
+- attention to versions of python and
+  using configparser which changes sig
+  for python version 3
+- attention to different operating system
+  filepaths
+* record/test_all
+- updated
+
 2013AUG11
 * added HACK_INI.txt
 - describes how .ini files are used

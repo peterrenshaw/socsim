@@ -11,18 +11,20 @@
   desc SOCSIM: A scenario simulation tool for social media.
 
 
-2013AUG12
-* [] py install script
-* [] build factory, ini & test code
-- factory.Factory
-- factory.Load
-- test_factory
-- test_load
+2013AUG13
+* [] build factory.Factory
 * [] fix hacked code
 * [] write story on factory process, ini->JSON
 * [] build better version in JavaScript
 * [] create html interface using Angular
+* [] py install script
 
+
+2013AUG12
+* [x] build factory, ini & test code
+- factory.Ini
+- factory.Ini.read
+- test_ini
 
 2013AUG11
 * [x] example with cli input to build, save (.ini)
