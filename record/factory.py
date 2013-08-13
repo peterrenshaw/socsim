@@ -74,10 +74,10 @@ import record
 # desc: imports data in various ways & prepares for factory
 #---
 class Ini:
-    def __init__(self, pyversion):
+    def __init__(self, py_version):
         """prepare delivery"""
         self.filepathname = ""
-        self.pyver = pyversion
+        self.pyver = py_version
         self.store = []
     # --- ini file
     def read(self, config, filepathname):
@@ -97,17 +97,27 @@ class Ini:
         # setup, read ini, break down
         self.store = []
         t = []
-        config.read(self.filepathname)
-        sections = config.sections()
-
-        # look thru sections, extract title, per title key & value
-        for title in sections:
-            t.append(dict(title=title))
-            for key in config.items(title):
-                t.append(dict(key=key[0], value=key[1]))
-            self.store.append(t)
-            t = []
-        return True
+        try:
+            config.read(self.filepathname)    # TODO handling here for bad input
+            sections = config.sections()
+        except:
+            #print("error: we have an error <%s>" % config)
+            #print("\tfile = <%s>" % self.filepathname)
+            #sys.exit(1)
+            return False
+        if sections:
+            # look thru sections, extract title, per title key & value
+            for title in sections:
+                t.append(dict(title=title))
+                for key in config.items(title):
+                    t.append(dict(key=key[0], value=key[1]))
+                self.store.append(t)
+                t = []
+            return True
+        else:
+            # print("error: no sections found in <%s>" % (self.filepathname))
+            # sys.exit(1)
+            return False
     def all(self):
         """return all data in store, or F"""
         if len(self.store) > 0:
