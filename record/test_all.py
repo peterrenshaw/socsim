@@ -29,7 +29,7 @@ import record
 import test_meta
 import test_record
 import test_tools
-import test_delivery
+import test_ini
 import test_factory
 
 
@@ -42,14 +42,14 @@ def main():
     suite_meta = test_meta.suite()
     suite_record = test_record.suite()
     suite_tools = test_tools.suite()
-    suite_delivery = test_delivery.suite()
+    suite_ini = test_ini.suite()
     suite_factory = test_factory.suite()
 
     # add the suite to be tested here
     alltests = unittest.TestSuite((suite_meta, 
                                    suite_record,
                                    suite_tools,
-                                   suite_delivery,
+                                   suite_ini,
                                    suite_factory))
 
     # run the suite

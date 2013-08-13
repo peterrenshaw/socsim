@@ -28,7 +28,7 @@
 # copy: copyright (C) 2013 Peter Renshaw
 #===
 
-
+import os
 import sys
 
 
@@ -37,20 +37,30 @@ import sys
 def hex_version():
     """python version in hex"""
     return '%x' % sys.hexversion
+
+# hack_import_configparser: difference called in Py2 to Py3
+def hack_import_configparser(pyhv):
+    """
+    In version 2 upwards in python 'import ConfigParser' is used.
+    In version 3 onwards, 'import configparser' is used. Sux!!!
+    """
+    if pyhv >= "30000f0":     # py3
+        import configparser   # look at this *carefully*
+        config = configparser.ConfigParser()
+    elif pyhv > "20000f0":    # py2 
+        import ConfigParser   # look at this *carefully*
+        config = ConfigParser.ConfigParser()
+    else: 
+        # less than py2
+        print("error: python version not able to support this code")
+        print("version: <%s>" % pyhv)
+        sys.exit(1)
+    return config
+
+# ATTENTION:
+# need this to import dynamically depending on python version
 pyhv = hex_version()
-if pyhv >= "30000f0":
-    # py3
-    import configparser
-    config = configparser.ConfigParser()
-elif pyhv > "20000f0":
-    # py2 
-    import configparser
-    config = ConfigParser.ConfigParser()
-else: 
-    # less than py2
-    print("error: python version not able to support this code")
-    print("version: <%s>" % pyhv)
-    sys.exit(1)
+hack_import_configparser(pyhv)
 # ---
 
 
@@ -58,68 +68,52 @@ import record
 
 
 #---
-# name: Delivery
+# name: Ini
 # date: 2013AUG12
 # prog: pr
 # desc: imports data in various ways & prepares for factory
 #---
-class Delivery:
-    def __init__(self, pyversion, filepathname=""):
+class Ini:
+    def __init__(self, pyversion):
         """prepare delivery"""
-        self.filepathname = filepathname
+        self.filepathname = ""
         self.pyver = pyversion
         self.store = []
-        
-    # TODO fix this for exact hex
-    def is_py3(self):
-        """borked: check exact hex version"""
-        return self.pyver >= '30000f0'
-    def is_py2(self):
-        """borked: find the exact hex version"""
-        return self.pyver < '30000f0' and self.pyver >= '20703c2'
     # --- ini file
-    def ini(self, config, filepathname=""):
+    def read(self, config, filepathname):
         """input ini config obj to parse"""
         # need a valid filename to load
-        if filepathname:
-            if os.path.isfile(filepathname):
-                self.filepathname = filepathname
-            else:
+        self.filepathname = filepathname
+        if self.filepathname:
+            if not os.path.isfile(self.filepathname):
+                #print("error: no valid filepathname <%s>" % self.filepathname)
+                #sys.exit(1)
                 return False
-        if not self.filepathname:
+        else:
+            #print("error: no filepathname found <%s>" % self.filepathname)
+            #sys.exit(1)
             return False
 
-        # read ini, break down
-        data = []
+        # setup, read ini, break down
+        self.store = []
+        t = []
         config.read(self.filepathname)
         sections = config.sections()
 
-        # look thru sections, extract
-        for atitle in sections:
-            d = dict(title=atitle)
-
-            # check python version
-            if self.__is_py3():
-                for akey in config.items(title):
-                    d = d + dict(key=akey, value=config[title][key])
-                data.append(d)
-            elif self.__is_py2():
-                for akey in config[atitle]:
-                    d = d + dict(key=akey, value=config[atitle][akey])
-                data.append(d)
-            else:
-                # problem, die
-                return False
-        # update the store
-        self.store.append(data)
+        # look thru sections, extract title, per title key & value
+        for title in sections:
+            t.append(dict(title=title))
+            for key in config.items(title):
+                t.append(dict(key=key[0], value=key[1]))
+            self.store.append(t)
+            t = []
         return True
     def all(self):
         """return all data in store, or F"""
         if len(self.store) > 0:
-             return self.data
+             return self.store
         else:
              return False
-
 
 
 def main():
