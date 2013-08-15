@@ -38,6 +38,19 @@ class TestRecord(unittest.TestCase):
         self.r = None
 
 
+    # init
+    def test_init_ok(self):
+        """initialise Record, T"""
+        self.assertTrue(self.r)
+
+    #---
+    # TODO HACK ALERT, fix me
+    # check for bad data input, fail requires 
+    # obj.status check
+    def test_init_fail(self):
+        """inject non list ie: self.m instead of self.m.all()"""
+        self.r = record.Record(self.m)
+        self.assertFalse(self.r.status())
     # new
     def test_new(self):
         """test new ok"""
@@ -180,7 +193,9 @@ class TestRecord(unittest.TestCase):
 #---
 def suite():
     """tests added to run in 'test_all.py'"""
-    tests = ['test_new',
+    tests = ['test_init_ok',
+             'test_init_fail',
+             'test_new',
              'test_add_ok',
              'test_add_unique',
              'test_add_bulk_ok',

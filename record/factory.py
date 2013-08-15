@@ -30,6 +30,7 @@
 
 import os
 import sys
+import collections
 
 
 # --- HACK ALERT --- 
@@ -58,7 +59,7 @@ def hack_import_configparser(pyhv):
     return config
 
 # ATTENTION:
-# need this to import dynamically depending on python version
+# need this to import dynamically, depending on python version
 pyhv = hex_version()
 hack_import_configparser(pyhv)
 # ---
@@ -68,10 +69,38 @@ import record
 
 
 #---
+# get_home_path_os: from os.sys.platform()
+#                   find OS name & ret path
+# <http://docs.python.org/2/library/sys.html#sys.platform>
+# TODO fix paths here
+#---
+def get_home_path_os(name):
+    if name.lower() == 'linux2':
+        home = '/home/pr'  # linux
+    elif name.lower() == 'win32':
+        home = 'e:\\'      # windows
+    elif name.lower() == 'darwin':
+        home = False
+    else:
+        home = False       # everything else fails (for the moment)
+    return home
+
+
+#---
 # name: Ini
 # date: 2013AUG12
 # prog: pr
 # desc: imports data in various ways & prepares for factory
+# note:
+#       * extracting Ini titles have to be added as something like
+#         
+#         ini.Title    --->    Key = TITLE, value = ini.Title
+#           
+#         This helps later on in factory.Factory.build() where you have
+#         to translate python data structure with KEY/VALUE pairs. If you 
+#         use this consistantly, search is seamless and translation to 
+#         record.Meta and insertion into record.Record via record.Record.add
+#         runs smoothly.
 #---
 class Ini:
     def __init__(self, py_version):
@@ -105,10 +134,9 @@ class Ini:
             #print("\tfile = <%s>" % self.filepathname)
             #sys.exit(1)
             return False
-        if sections:
-            # look thru sections, extract title, per title key & value
+        if sections: # look thru sections, extract title, per title key & value
             for title in sections:
-                t.append(dict(title=title))
+                t.append(dict(key='TITLE', value=title))       # IMPORTANT see note (*)
                 for key in config.items(title):
                     t.append(dict(key=key[0], value=key[1]))
                 self.store.append(t)
@@ -125,10 +153,86 @@ class Ini:
         else:
              return False
 
+#---
+# name: Factory
+# date: 2013AUG13
+# prog: pr
+# desc: from py objects, convert this data into record.Meta
+#       and add them to record.Record as a container. Depending
+#       on status, build & spit out the results at all() call.
+#       Able to obtain statitic breakdown of objects.
+#---
+class Factory:
+    def __init__(self, data, meta, record):
+        """initialise, read to start"""
+        self.data = data
+        self.store = []
+        self.__status = False
+        self.__meta = meta
+        self.__record = record
+    def status(self):
+        """current status of build"""
+        return self.__status
+    def __data_check(self, data):
+        """check data for problems"""
+        if data:                                            # data found?
+            if len(data) > 0:                               # len > 0?
+                if isinstance(data, collections.Iterable):  # itterable?
+                    self.data = data
+                    return True
+        return False
+    def __get_all_byname(self, data, key):
+        """generalised search for key/value pairs in list"""
+        for item in data:
+            if item['key'] == key:
+                return item
+        return False
+    def __get_value_byname(self, data, key):
+        """
+        convenience function for __get_all_byname,
+        return 'value' of result
+        """
+        data = self.__get_all_byname(data, key)
+        if data:
+            return data['value']
+        else:
+            return False
+    def build(self, data=""):
+        """
+        itterate thru data and build record.Meta, update
+        stats, record.Record.add()
+        """
+        if data: 
+            self.data = data
+        if not self.__data_check(self.data):
+            return False
+
+
+        for data in self.data:
+            title = self.__get_value_byname(data, 'TITLE')
+            description = self.__get_value_byname(data, 'description')
+            self.__meta.new(title, description)
+
+            for item in data:
+                if 'key' in item and 'value' in item:
+                    self.__meta.add(item['key'], item['value'])
+                    
+            self.__record.add(title, self.__meta.all())
+        self.__status = True
+        return True
+    def statistics(self):
+        """
+        count record.Meta in record.Record, and types
+        and count of Meta key/value items.
+        """
+        return False
+    def all(self):
+        """return built container record.Record"""
+        return self.__record.all()
+
 
 def main():
     pass
-
 
 if __name__ == "__main__":
     main()

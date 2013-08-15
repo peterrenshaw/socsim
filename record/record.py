@@ -32,6 +32,7 @@
 import json
 import time
 import os.path
+import collections
 
 
 #--- tools ---
@@ -144,7 +145,17 @@ class Record:
         self.name = ""
         self.value = ""
         self.removed = False # future removal flag
-        self.__add_bulk_data(meta)
+        #---
+        # TODO HACK ALERT, fix me
+        # check for bad data input, fail requires 
+        # obj.status check
+        self.__status = False
+        if isinstance(meta, collections.Iterable):
+            self.__add_bulk_data(meta)
+        #---
+    def status(self):
+        """current record status - bulk metadata input"""
+        return self.__status
     def new(self, meta):
         """clear obj, add new meta"""
         self.store = []
@@ -164,10 +175,17 @@ class Record:
     def __add_bulk_data(self, data):
         """data input as list of key/values"""
         if data:
-            for d in data:
-                if not self.__add_data(d):
-                    return False
-            return True
+            # test if data is itterable
+            # specific test for record.Meta
+            # not record.Meta.all()
+            try:
+                for d in data:
+                    if not self.__add_data(d):
+                        return False
+                self.__status = True
+                return True
+            except TypeError:
+                return False
         return False
     def __add_data(self, data):
         """add data to store, no duplicate keys"""

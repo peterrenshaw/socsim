@@ -29,18 +29,86 @@ import unittest
 
 
 import factory
+import record
 
 
 class TestFactory(unittest.TestCase):
     def setUp(self):
-        pass
-    def tearDown(self):
-        pass
+        # os independent home dir
+        self.osname = os.sys.platform
+        self.home = factory.get_home_path_os(self.osname)
+        self.basepath = os.path.join('code','socsim','record')
+        self.filepathname_fail = os.path.join(self.home, self.basepath,'empty.ini')
+        self.filepathname_titleno = os.path.join(self.home,self.basepath,'title_non.ini')
+        self.filepathname = os.path.join(self.home, self.basepath,'urls.ini')
 
-    # new
-    def test_new_ok(self):
-        """ add new name & desc, return T"""
-        pass
+        # python versions
+        self.pyhv = factory.hex_version()
+
+        # Ini
+        self.ini_title = "Urls"
+        self.ini_desc = "description of URL information"
+        self.c = factory.hack_import_configparser(self.pyhv)
+        self.i = factory.Ini(self.pyhv)
+        self.i.read(self.c, self.filepathname)
+        self.data = self.i.all()
+
+        # record obj
+        self.m = record.Meta(self.ini_title, self.ini_desc)
+        self.ma = self.m.all()    # Warning: must return all before injection
+        self.r = record.Record(self.ma)
+
+        # Factory
+        self.f = factory.Factory(self.data, self.m, self.r)
+    def tearDown(self):
+        self.f = None
+        self.i = None
+        self.c = None
+        self.data = None
+        self.m = None
+        self.ma = None
+        self.r = None
+
+        self.pyhv = None
+        self.filepathname = None
+        self.filepathname_fail = None
+        self.home = None
+
+    # init
+    def test_fac_ok(self):
+        """add new name & desc, return T"""
+        self.assertTrue(self.f)
+    # status
+    def test_fac_status_ok(self):
+        """default status, F"""
+        status = self.f.status()
+        self.assertFalse(status)
+    # build
+    def test_fac_build_ok(self):
+        """default build, empty data, F"""
+        d = []
+        # T because we use default 
+        status = self.f.build(d)
+        self.assertTrue(status)
+    def test_fac_build_meta_ok(self):
+        """check build using ini file contents"""
+        status = self.f.build()
+        self.assertTrue(status)
+    def test_fac_build_valid_ok(self):
+        """build with data, T"""
+        status = self.f.build()
+        self.assertTrue(status)
+    # statistics
+    def test_fac_statistics_ok(self):
+        """default stat, F"""
+        status = self.f.statistics()
+        self.assertFalse(status)
+    # all
+    def test_fac_all_ok(self):
+        """default, F"""
+        self.f.build()
+        status = self.f.all()
+        self.assertTrue(status)
 
 
 #---
@@ -48,7 +116,13 @@ class TestFactory(unittest.TestCase):
 #---
 def suite():
     """tests added to run in 'test_all.py'"""
-    tests = ['test_new_ok']
+    tests = ['test_fac_ok',
+             'test_fac_status_ok',
+             'test_fac_build_ok',
+             'test_fac_build_meta_ok',
+             'test_fac_build_valid_ok',
+             'test_fac_statistics_ok',
+             'test_fac_all_ok']
 
     return unittest.TestSuite(map(TestFactory, tests))
 

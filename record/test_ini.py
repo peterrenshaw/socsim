@@ -24,7 +24,6 @@
 
 
 import os
-import json
 import os.path
 import unittest
 
@@ -32,27 +31,11 @@ import unittest
 import factory
 
 
-# get_home_path_os: from os.sys.platform()
-#                   find OS name & ret path
-# <http://docs.python.org/2/library/sys.html#sys.platform>
-# TODO fix paths here
-def get_home_path_os(name):
-    if name.lower() == 'linux2':
-        home = '/home/pr'  # linux
-    elif name.lower() == 'win32':
-        home = 'e:\\'      # windows
-    elif name.lower() == 'darwin':
-        home = False
-    else:
-        home = False       # everything else fails (for the moment)
-    return home
-
-
 class TestIni(unittest.TestCase):
     def setUp(self):
         # os independent home dir
         self.osname = os.sys.platform
-        self.home = get_home_path_os(self.osname)
+        self.home = factory.get_home_path_os(self.osname)
         self.basepath = os.path.join('code','socsim','record')
         self.filepathname_fail = os.path.join(self.home, self.basepath,'empty.ini')
         self.filepathname_titleno = os.path.join(self.home,self.basepath,'title_non.ini')
@@ -60,8 +43,6 @@ class TestIni(unittest.TestCase):
 
         # python versions
         self.pyhv = factory.hex_version()
-        self.pyhv3 = "30000f0"
-        self.pyhv2 = "20000f0"
 
         self.c = factory.hack_import_configparser(self.pyhv)
         self.i = factory.Ini(self.pyhv)
