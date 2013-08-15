@@ -168,7 +168,8 @@ class Record:
         if name and value:
             n = name.replace(' ','-')  # do not allow spaces in key
             # key as unique name, value as data, deleted flag for removal
-            return self.__add_data(dict(key=n, value=value,
+            return self.__add_data(dict(key=n, 
+                                        value=value,
                                         deleted=self.removed))
         else:
             return False

@@ -1,0 +1,720 @@
+                                _          
+     _____ ____   _____  _____ (_)____ ___ 
+    / ___// __ \ / ___/ / ___// // __ `__ \
+   (__  )/ /_/ // /__  (__  )/ // / / / / /
+  /____/ \____/ \___/ /____//_//_/ /_/ /_/ [1]
+
+
+    name: HACK_Factory.txt
+    date: 2013AUG11
+    prog: pr
+    desc: design of ideas to use the data extracted from
+          an .ini file. Extract the data and pass to a Factory 
+          object to build meta blocks and insert into a container 
+          called a Record block. Finally convert python data to JSON
+          and save to a file.
+
+
+abstract
+
+    The thinking into building info input, manip and display
+    modules for data. In this case use .ini files for easy
+    to understand creation & editing.
+
+    Once the .ini file is created, use the Ini module discuessed 
+    in HACK_INI.txt to read the data and pass to a Factory object
+    that create then insert record.Meta objects into a container,
+    record.Record. 
+
+    Finally extract the data, convert this python data to JSON & 
+    save.
+
+    Read: HACK_INI.txt  How to read from an .ini file.
+          DESIGN.txt for the original ideas
+          
+
+Last hack was to read .ini files to extract the data. The result is the 
+factory.Factory.Ini module.  Remeber there was a change in the configparser 
+object name in the move from Python two to Python three. Well the hack 
+requried is found in factory.hack_import_configparser(pythonversion). The 
+method requires you know the current python version and depending on the 
+version, dynamically importing the configparser code.
+
+Ugly.
+
+What we get back is a list of dictionary objects with a key and value pair. 
+We start off with a file (urls.ini) which has a data block like this:
+
+    [hackernews]
+    url = news.ycombinator.com/?users=bootload
+    user = bootload
+    function = entreprenerial/technical reading, forum
+    started = 2006
+    ended = 2012
+    status = dead
+    description = hacker news and information
+
+
+and we pass it through factory.Ini to get this:
+
+    [{'key': 'TITLE', 'value': 'hackernews'}
+     {'key': 'url', 'value': 'news.ycombinator.com/?users=bootload'}
+     {'key': 'user', 'value': 'bootload'}
+     {'key': 'function', 'value': 'entreprenerial/technical reading, forum'}
+     {'key': 'started', 'value': '2006'}
+     {'key': 'ended', 'value': '2012'}
+     {'key': 'status', 'value': 'dead'}
+     {'key': 'description', 'value': 'hacker news and information'}]
+
+
+Meta
+
+Now the idea of the factory.Factory object is to turn this list of 
+dictionaries into a data block. Now a good question to ask is why bother? 
+You could probalby use this data, as-is. The record.Meta object allows the 
+addition of extra checking and meta data and this is a good thing. For 
+example for each block the following is added:
+
+    title
+    description
+    created
+
+These are default meta data. Additional key/value items can be added with 
+record.Meta objects. Extra processing also allows the enforcement of rules. 
+One rule in particular is to not allow duplicate keys to be inserted. 
+
+
+Record
+
+So what do we do with all these related but separate meta blocks? How about 
+grouping them together as a collection. I've called this collection a Record. 
+I'm not sure this is the best description, but it will do. Now a record is 
+described in the code record.Record. The object has three main functions, add
+a meta object, search the contents of data in the store (list) and returning
+the contents of the store. The Record object is designed so that each function
+returns a checkable status making it easier to test. 
+
+
+Factory
+
+The factory.Factory module adds the meta blocks extracted from the Ini module
+testing them as they are added. Finally the blocks are added to a master list
+with all the blocks, called the store. The trick is allowing:
+
+
+    Record stored as Python list
+        # index = 0
+        # new record.Meta block
+        key: title,       value = TITLE (from Ini)
+        key: description, value = Meta data block description
+        key: title,       value = [list of factory.Ini key/values]
+
+        # index = 1
+        # new record.Meta block
+        key title, value = TITLE (from Ini)
+        key description, value = Meta data block description
+        key title, value = [list of factory.Ini key/values]
+
+        ....
+
+So a list is created, made up of record.Meta blocks with the factory.Ini 
+key/values. While the data is in the Record object it is not yet possible
+to edit or search. At the moment it is not possible to create a record, 
+the export to an Ini file. This is not a hard problem to solve. 
+
+
+Testing
+
+The testing is found in test_factory.py. The fist 
+problem encounted was working on different OS's, Windows and Linux. To 
+get around this a check using os.sys.platform is made. From this a 
+filepath to the .ini file is built. From here things move fast. 
+
+    The python version is found
+    The configparser import is dynamically generated
+    A Ini object is created and .ini file extracted
+    A Record object is created with associated meta description
+    Finally the factory.Factory object is created to process the data.
+
+Testing at the moment is pretty simple and looks at the initialisation, 
+build and return. The testing may not be extensive but it builds on the 
+testing done on record.Meta, record.Record, factory.Ini, factory.Factory
+objects. Quite a few problems were detected prior to testing the 
+integration of all these objects. 
+
+
+The final test is found in hack_ini2json.py where the process found in the 
+testing code was reproduced:
+
+    a) Setup
+    find python version
+    dynamically build configparser import
+    
+
+    b) Process
+    Ini: build Ini object and extract data
+    Record: build record
+    Factory: build factory.Factory using config, ini data and meta data
+             and extract data
+   
+    c) Convert and save
+    convert the python code to JSON
+    save the data.
+
+Here's the result. From the original urls.ini file:
+
+
+/* === START === */
+[meta]
+url = meta.ini
+user = system
+function = meta
+date = 2013AUG10
+prog = pr
+desc = most commonly used online sites that I use.
+
+[seldomlogical]
+url = seldomlogical.com
+user = peterrenshaw
+function = blog
+started = 2008
+status = current
+description = new ideas, ideal solutions are seldom logical. 
+              attaining a desired goal always is
+
+[twitter]
+url = twitter.com
+user = @peterrenshaw
+function = contact
+started = 2006
+status = current
+description = Another Scrappy Startup ☮ ♥ ♬ ⌨ 
+              melbourne, australia · seldomlogical.com
+
+[flickr]
+url = flickr.com/photos/bootload
+user = bootload 
+function = image storage
+started = 2005
+status = current
+description = Member since 2005, 20,000 images and counting
+
+[trovebox]
+url = peterrenshaw.trovebox.com
+user = peterrenshaw
+function = image storage
+started = 2013
+status = current
+description = ☮ ♥ ♬ ⌨
+
+[github]
+url = github.com/peterrenshaw
+user = peterrenshaw
+function = code repository
+started = 2013
+status = current
+description = online code repository
+
+[facebook]
+url = facebook.com/peter.renshaw
+user = peter.renshaw
+function = personal online stuff
+started = 2007
+status = current
+description = sad place where I talk to my old mates
+
+[hackernews]
+url = news.ycombinator.com/?users=bootload
+user = bootload
+function = entreprenerial/technical reading, forum
+started = 2006
+ended = 2012
+status = dead
+description = hacker news and information
+
+[slashdot]
+url = slashdot.com/~goon
+user = goon
+function = technical reading
+byline = news for nerds
+started = 1996
+status = current
+descritption = original 'hacker-news'
+
+[reddit]
+title = reddit.com/goon
+user = goon
+function = technical reading/forum
+started = 2006
+status = current
+description = launched on or very near hackernews start
+/* === END === */
+
+And here's the output, urls.json file
+
+/* === START === */
+[
+    
+                                        {
+        "key": "title",
+        "value": "Ini2JSON"
+    },
+    {
+        "key": "description",
+        "value": "Ini end to end testing. Ini data to JSON"
+    },
+    {
+        "key": "created",
+        "value": "2013AUG151749.17"
+    },
+    {
+        "deleted": false,
+        "key": "meta",
+        "value": [
+            {
+                "key": "title",
+                "value": "meta"
+            },
+            {
+                "key": "description",
+                "value": false
+            },
+            {
+                "key": "created",
+                "value": "2013AUG151749.17"
+            },
+            {
+                "key": "TITLE",
+                "value": "meta"
+            },
+            {
+                "key": "url",
+                "value": "meta.ini"
+            },
+            {
+                "key": "user",
+                "value": "system"
+            },
+            {
+                "key": "function",
+                "value": "meta"
+            },
+            {
+                "key": "date",
+                "value": "2013AUG10"
+            },
+            {
+                "key": "prog",
+                "value": "pr"
+            },
+            {
+                "key": "desc",
+                "value": "most commonly used online sites that I use."
+            }
+        ]
+    },
+    {
+        "deleted": false,
+        "key": "seldomlogical",
+        "value": [
+            {
+                "key": "title",
+                "value": "seldomlogical"
+            },
+            {
+                "key": "description",
+                "value": "new ideas, ideal solutions are seldom logical.\nattaining a desired goal always is"
+            },
+            {
+                "key": "created",
+                "value": "2013AUG151749.17"
+            },
+            {
+                "key": "TITLE",
+                "value": "seldomlogical"
+            },
+            {
+                "key": "url",
+                "value": "seldomlogical.com"
+            },
+            {
+                "key": "user",
+                "value": "peterrenshaw"
+            },
+            {
+                "key": "function",
+                "value": "blog"
+            },
+            {
+                "key": "started",
+                "value": "2008"
+            },
+            {
+                "key": "status",
+                "value": "current"
+            }
+        ]
+    },
+    {
+        "deleted": false,
+        "key": "twitter",
+        "value": [
+            {
+                "key": "title",
+                "value": "twitter"
+            },
+            {
+                "key": "description",
+                "value": "Another Scrappy Startup \u00e2\u02dc\u00ae \u00e2\u2122\u00a5 \u00e2\u2122\u00ac \u00e2\u0152\u00a8\nmelbourne, australia \u00c2\u00b7 seldomlogical.com"
+            },
+            {
+                "key": "created",
+                "value": "2013AUG151749.17"
+            },
+            {
+                "key": "TITLE",
+                "value": "twitter"
+            },
+            {
+                "key": "url",
+                "value": "twitter.com"
+            },
+            {
+                "key": "user",
+                "value": "@peterrenshaw"
+            },
+            {
+                "key": "function",
+                "value": "contact"
+            },
+            {
+                "key": "started",
+                "value": "2006"
+            },
+            {
+                "key": "status",
+                "value": "current"
+            }
+        ]
+    },
+    {
+        "deleted": false,
+        "key": "flickr",
+        "value": [
+            {
+                "key": "title",
+                "value": "flickr"
+            },
+            {
+                "key": "description",
+                "value": "Member since 2005, 20,000 images and counting"
+            },
+            {
+                "key": "created",
+                "value": "2013AUG151749.17"
+            },
+            {
+                "key": "TITLE",
+                "value": "flickr"
+            },
+            {
+                "key": "url",
+                "value": "flickr.com/photos/bootload"
+            },
+            {
+                "key": "user",
+                "value": "bootload"
+            },
+            {
+                "key": "function",
+                "value": "image storage"
+            },
+            {
+                "key": "started",
+                "value": "2005"
+            },
+            {
+                "key": "status",
+                "value": "current"
+            }
+        ]
+    },
+    {
+        "deleted": false,
+        "key": "trovebox",
+        "value": [
+            {
+                "key": "title",
+                "value": "trovebox"
+            },
+            {
+                "key": "description",
+                "value": "\u00e2\u02dc\u00ae \u00e2\u2122\u00a5 \u00e2\u2122\u00ac \u00e2\u0152\u00a8"
+            },
+            {
+                "key": "created",
+                "value": "2013AUG151749.17"
+            },
+            {
+                "key": "TITLE",
+                "value": "trovebox"
+            },
+            {
+                "key": "url",
+                "value": "peterrenshaw.trovebox.com"
+            },
+            {
+                "key": "user",
+                "value": "peterrenshaw"
+            },
+            {
+                "key": "function",
+                "value": "image storage"
+            },
+            {
+                "key": "started",
+                "value": "2013"
+            },
+            {
+                "key": "status",
+                "value": "current"
+            }
+        ]
+    },
+    {
+        "deleted": false,
+        "key": "github",
+        "value": [
+            {
+                "key": "title",
+                "value": "github"
+            },
+            {
+                "key": "description",
+                "value": "online code repository"
+            },
+            {
+                "key": "created",
+                "value": "2013AUG151749.17"
+            },
+            {
+                "key": "TITLE",
+                "value": "github"
+            },
+            {
+                "key": "url",
+                "value": "github.com/peterrenshaw"
+            },
+            {
+                "key": "user",
+                "value": "peterrenshaw"
+            },
+            {
+                "key": "function",
+                "value": "code repository"
+            },
+            {
+                "key": "started",
+                "value": "2013"
+            },
+            {
+                "key": "status",
+                "value": "current"
+            }
+        ]
+    },
+    {
+        "deleted": false,
+        "key": "facebook",
+        "value": [
+            {
+                "key": "title",
+                "value": "facebook"
+            },
+            {
+                "key": "description",
+                "value": "sad place where I talk to my old mates"
+            },
+            {
+                "key": "created",
+                "value": "2013AUG151749.17"
+            },
+            {
+                "key": "TITLE",
+                "value": "facebook"
+            },
+            {
+                "key": "url",
+                "value": "facebook.com/peter.renshaw"
+            },
+            {
+                "key": "user",
+                "value": "peter.renshaw"
+            },
+            {
+                "key": "function",
+                "value": "personal online stuff"
+            },
+            {
+                "key": "started",
+                "value": "2007"
+            },
+            {
+                "key": "status",
+                "value": "current"
+            }
+        ]
+    },
+    {
+        "deleted": false,
+        "key": "hackernews",
+        "value": [
+            {
+                "key": "title",
+                "value": "hackernews"
+            },
+            {
+                "key": "description",
+                "value": "hacker news and information"
+            },
+            {
+                "key": "created",
+                "value": "2013AUG151749.17"
+            },
+            {
+                "key": "TITLE",
+                "value": "hackernews"
+            },
+            {
+                "key": "url",
+                "value": "news.ycombinator.com/?users=bootload"
+            },
+            {
+                "key": "user",
+                "value": "bootload"
+            },
+            {
+                "key": "function",
+                "value": "entreprenerial/technical reading, forum"
+            },
+            {
+                "key": "started",
+                "value": "2006"
+            },
+            {
+                "key": "ended",
+                "value": "2012"
+            },
+            {
+                "key": "status",
+                "value": "dead"
+            }
+        ]
+    },
+    {
+        "deleted": false,
+        "key": "slashdot",
+        "value": [
+            {
+                "key": "title",
+                "value": "slashdot"
+            },
+            {
+                "key": "description",
+                "value": false
+            },
+            {
+                "key": "created",
+                "value": "2013AUG151749.17"
+            },
+            {
+                "key": "TITLE",
+                "value": "slashdot"
+            },
+            {
+                "key": "url",
+                "value": "slashdot.com/~goon"
+            },
+            {
+                "key": "user",
+                "value": "goon"
+            },
+            {
+                "key": "function",
+                "value": "technical reading"
+            },
+            {
+                "key": "byline",
+                "value": "news for nerds"
+            },
+            {
+                "key": "started",
+                "value": "1996"
+            },
+            {
+                "key": "status",
+                "value": "current"
+            },
+            {
+                "key": "descritption",
+                "value": "original 'hacker-news'"
+            }
+        ]
+    },
+    {
+        "deleted": false,
+        "key": "reddit",
+        "value": [
+            {
+                "key": "title",
+                "value": "reddit"
+            },
+            {
+                "key": "description",
+                "value": "launched on or very near hackernews start"
+            },
+            {
+                "key": "created",
+                "value": "2013AUG151749.17"
+            },
+            {
+                "key": "TITLE",
+                "value": "reddit"
+            },
+            {
+                "key": "user",
+                "value": "goon"
+            },
+            {
+                "key": "function",
+                "value": "technical reading/forum"
+            },
+            {
+                "key": "started",
+                "value": "2006"
+            },
+            {
+                "key": "status",
+                "value": "current"
+            }
+        ]
+    }
+]
+/* === END === */
+
+Conclusions:
+
+The code still needs work. Some of the keys are dubious, the deleted key for 
+instance. The basic idea is sound though and can be modified if required.
+
+PR
+
+
+
+[1] Title created with an ASCII text generator using 'slant' and 'stretch=Yes". 
+The code is based on Figlet which can be found here ~ <http://www.figlet.org/>
+[Last accessed: Sunday 4th August, 2013]
+<http://www.network-science.de/ascii/>
+
+
+vim: ff=unix:ts=4:sw=4:tw=78:noai:expandtab
