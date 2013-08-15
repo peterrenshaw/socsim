@@ -111,8 +111,7 @@ class TestRecord(unittest.TestCase):
         """seach by key for item, ok"""
         key = "unknownlegend"
         self.r.add(key, "unknown legend in her own time")
-        result = {'deleted': False, 
-                  'value': 'unknown legend in her own time', 
+        result = {'value': 'unknown legend in her own time', 
                   'key': 'unknownlegend'}
         #print(self.r.search_item(key))
         self.assertEqual(self.r.search_item(key), result)

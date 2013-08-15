@@ -144,7 +144,6 @@ class Record:
         self.store = []
         self.name = ""
         self.value = ""
-        self.removed = False # future removal flag
         #---
         # TODO HACK ALERT, fix me
         # check for bad data input, fail requires 
@@ -169,8 +168,7 @@ class Record:
             n = name.replace(' ','-')  # do not allow spaces in key
             # key as unique name, value as data, deleted flag for removal
             return self.__add_data(dict(key=n, 
-                                        value=value,
-                                        deleted=self.removed))
+                                        value=value))
         else:
             return False
     def __add_bulk_data(self, data):

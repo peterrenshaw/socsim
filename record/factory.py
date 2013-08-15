@@ -119,7 +119,7 @@ class Ini:
             return False
         if sections: # look thru sections, extract title, per title key & value
             for title in sections:
-                t.append(dict(key='TITLE', value=title))       # IMPORTANT see note (*)
+                t.append(dict(key='title', value=title))       # IMPORTANT see note (*)
                 for key in config.items(title):
                     t.append(dict(key=key[0], value=key[1]))
                 self.store.append(t)
@@ -191,7 +191,7 @@ class Factory:
             return False
 
         for data in self.data:
-            title = self.__get_value_byname(data, 'TITLE')
+            title = self.__get_value_byname(data, 'title')
             description = self.__get_value_byname(data, 'description')
             self.__meta.new(title, description)
 
