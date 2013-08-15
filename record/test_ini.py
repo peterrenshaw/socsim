@@ -28,6 +28,7 @@ import os.path
 import unittest
 
 
+import tools
 import factory
 
 
@@ -35,7 +36,7 @@ class TestIni(unittest.TestCase):
     def setUp(self):
         # os independent home dir
         self.osname = os.sys.platform
-        self.home = factory.get_home_path_os(self.osname)
+        self.home = tools.get_home_path_os(self.osname)
         self.basepath = os.path.join('code','socsim','record')
         self.filepathname_fail = os.path.join(self.home, self.basepath,'empty.ini')
         self.filepathname_titleno = os.path.join(self.home,self.basepath,'title_non.ini')

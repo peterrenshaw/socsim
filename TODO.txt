@@ -11,14 +11,15 @@
   desc SOCSIM: A scenario simulation tool for social media.
 
 
-2013AUG13
-* [] build factory.Factory
-* [] fix hacked code
-* [] write story on factory process, ini->JSON
+outstanding
 * [] build better version in JavaScript
 * [] create html interface using Angular
 * [] py install script
 
+2013AUG15
+* [x] build factory.Factory
+* [x] fix hacked code
+* [x] write story on factory process, ini->JSON
 
 2013AUG12
 * [x] build factory, ini & test code

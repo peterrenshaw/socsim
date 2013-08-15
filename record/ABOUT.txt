@@ -11,6 +11,18 @@
     desc: description of ideas to build record
 
 
+2013AUG15
+* record/factory.Factory
+- done, tested
+* record/hack_read_ini2json.py
+- run, not tested but naive test works
+* input
+- urls.ini
+* output
+- urls.json
+* HACK_Factory.txt, written
+- rough version
+
 2013AUG13
 * record/factory.py
 - added

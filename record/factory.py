@@ -68,23 +68,6 @@ hack_import_configparser(pyhv)
 import record
 
 
-#---
-# get_home_path_os: from os.sys.platform()
-#                   find OS name & ret path
-# <http://docs.python.org/2/library/sys.html#sys.platform>
-# TODO fix paths here
-#---
-def get_home_path_os(name):
-    if name.lower() == 'linux2':
-        home = '/home/pr'  # linux
-    elif name.lower() == 'win32':
-        home = 'e:\\'      # windows
-    elif name.lower() == 'darwin':
-        home = False
-    else:
-        home = False       # everything else fails (for the moment)
-    return home
-
 
 #---
 # name: Ini

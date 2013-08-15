@@ -28,33 +28,16 @@ import os.path
 import unittest
 
 
+import tools
 import factory
 import record
-
-
-#---
-# get_home_path_os: from os.sys.platform()
-#                   find OS name & ret path
-# <http://docs.python.org/2/library/sys.html#sys.platform>
-# TODO fix paths here
-#---
-def get_home_path_os(name):
-    if name.lower() == 'linux2':
-        home = '/home/pr'  # linux
-    elif name.lower() == 'win32':
-        home = 'e:\\'      # windows
-    elif name.lower() == 'darwin':
-        home = False
-    else:
-        home = False       # everything else fails (for the moment)
-    return home
 
 
 class TestFactory(unittest.TestCase):
     def setUp(self):
         # os independent home dir
         self.osname = os.sys.platform
-        self.home = get_home_path_os(self.osname)
+        self.home = tools.get_home_path_os(self.osname)
         self.basepath = os.path.join('code','socsim','record')
         self.filepathname_fail = os.path.join(self.home, self.basepath,'empty.ini')
         self.filepathname_titleno = os.path.join(self.home,self.basepath,'title_non.ini')
