@@ -77,24 +77,26 @@ def main():
             ini = factory.Ini(pyversion)
             if not ini.read(config, options.source):
                 print("error: factory.Ini has a problem <%s>" % ini_data)
+
+            # extract Ini data
             ini_data = ini.all()
             if not ini_data:
                 print("error: could not extract factory.Ini \
                       from <%s>" % options.source)
                 sys.exit(1)
 
-            # describe 
+            # describe meta block
             meta_description = record.Meta('Ini2JSON',
                                            'Ini end to end testing. Ini data to JSON')
 
-            # container, add to factory, extact
+            # build container, add to factory and build then extact results
             c = record.Record(meta_description.all())
             f = factory.Factory(ini_data, meta_description, c)
             if not f.build():
                 print("error: problem building factory.build")
                 sys.exit(1)
 
-            # extract data
+            # extract data from factory
             data = f.all()
             if not data:
                 print("error: problem extracting data from Factory.all")
