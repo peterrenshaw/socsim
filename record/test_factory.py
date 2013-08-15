@@ -98,11 +98,6 @@ class TestFactory(unittest.TestCase):
         """build with data, T"""
         status = self.f.build()
         self.assertTrue(status)
-    # statistics
-    def test_fac_statistics_ok(self):
-        """default stat, F"""
-        status = self.f.statistics()
-        self.assertFalse(status)
     # all
     def test_fac_all_ok(self):
         """default, F"""
@@ -121,7 +116,6 @@ def suite():
              'test_fac_build_ok',
              'test_fac_build_meta_ok',
              'test_fac_build_valid_ok',
-             'test_fac_statistics_ok',
              'test_fac_all_ok']
 
     return unittest.TestSuite(map(TestFactory, tests))

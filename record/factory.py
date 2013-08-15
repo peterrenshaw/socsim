@@ -53,7 +53,7 @@ def hack_import_configparser(pyhv):
         config = ConfigParser.ConfigParser()
     else: 
         # less than py2
-        print("error: python version not able to support this code")
+        print("error: python version not able to support configparser :(")
         print("version: <%s>" % pyhv)
         sys.exit(1)
     return config
@@ -94,7 +94,7 @@ def get_home_path_os(name):
 # note:
 #       * extracting Ini titles have to be added as something like
 #         
-#         ini.Title    --->    Key = TITLE, value = ini.Title
+#         ini.Title    --->    Key = 'TITLE', value = ini.Title
 #           
 #         This helps later on in factory.Factory.build() where you have
 #         to translate python data structure with KEY/VALUE pairs. If you 
@@ -207,7 +207,6 @@ class Factory:
         if not self.__data_check(self.data):
             return False
 
-
         for data in self.data:
             title = self.__get_value_byname(data, 'TITLE')
             description = self.__get_value_byname(data, 'description')
@@ -220,12 +219,6 @@ class Factory:
             self.__record.add(title, self.__meta.all())
         self.__status = True
         return True
-    def statistics(self):
-        """
-        count record.Meta in record.Record, and types
-        and count of Meta key/value items.
-        """
-        return False
     def all(self):
         """return built container record.Record"""
         return self.__record.all()
