@@ -161,6 +161,9 @@ testing code was reproduced:
     convert the python code to JSON
     save the data.
 
+    d) run $> python hack_ini2json.py -s urls.ini -d $PATH/code/socsom/record/urls.json
+
+
 Here's the result. From the original urls.ini file:
 
 

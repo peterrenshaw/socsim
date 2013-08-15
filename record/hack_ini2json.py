@@ -33,6 +33,8 @@
 #       export to string/file
 #       write out as JSON
 #
+# use:  python hack_ini2json.py -s urls.ini -d $PATH/code/socsom/record/urls.json
+#
 # copy: copyright (C) 2013 Peter Renshaw
 #===
 
