@@ -27,7 +27,7 @@ import os.path
 import unittest
 
 
-import record
+import socsim.record
 
 
 class TestMeta(unittest.TestCase):
@@ -35,7 +35,7 @@ class TestMeta(unittest.TestCase):
         self.title = "a title"
         self.description = "a rather boring descripotion"
         self.source = os.path.join("e:","code","records")
-        self.m = record.Meta(self.title, self.description)
+        self.m = socsim.record.Meta(self.title, self.description)
         
     def tearDown(self):
         self.m = None

@@ -27,7 +27,7 @@ import os.path
 import unittest
 
 
-import record
+import socsim.tools
 
 
 class TestTools(unittest.TestCase):
@@ -45,37 +45,37 @@ class TestTools(unittest.TestCase):
     # py2json
     def test_py2json_ok(self):
         """input python, get out json"""
-        json = record.py2json(self.my_py)
+        json = socsim.tools.py2json(self.my_py)
         self.assertTrue(json)
         self.assertEqual(json, self.my_json)
     def test_py2json_empty_arg_fail(self):
         """empty arg should return F"""
-        self.assertFalse(record.py2json(""))
+        self.assertFalse(socsim.tools.py2json(""))
     # json2py
     def test_json2py_ok(self):
         """input json, get out python"""
-        py = record.json2py(self.my_json)
+        py = socsim.tools.json2py(self.my_json)
         self.assertTrue(py)
         self.assertEqual(py, self.my_py)
     def test_json2py_empyt_arg_fail(self):
         """empty arg should return F"""
-        self.assertFalse(record.json2py(""))
+        self.assertFalse(socsim.tools.json2py(""))
     # convert
     def test_convert_empty_arg_fail(self):
         """empty arg should fail"""
-        self.assertFalse(record.convert(""))
+        self.assertFalse(socsim.tools.convert(""))
     # save
     def test_save_empty_path_arg_fail(self):
         """empty arg/s for read, F"""
-        self.assertFalse(record.save("","data"))
+        self.assertFalse(socsim.tools.save("","data"))
     def test_save_empty_data_arg_fail(self):
         """empty data arg, F"""
         fp = os.path.join("")
-        self.assertFalse(record.save(fp, ""))
+        self.assertFalse(socsim.tools.save(fp, ""))
     # read
     def test_read_empty_fpn_arg_fail(self):
         """empty filepathname, F"""
-        self.assertFalse(record.load(""))
+        self.assertFalse(socsim.tools.load(""))
 
 
 #---

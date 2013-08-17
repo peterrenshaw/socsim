@@ -18,33 +18,41 @@
     along with SOCSIM.  If not, see <http://www.gnu.org/licenses/>.
 """
 
+
 #===
-# name  tools.py
+# name  socsim.py
 # date: 2013AUG15
 # prog: pr
-# desc: tools file
+# desc: place holder file
 # copy: copyright (C) 2013 Peter Renshaw
 #===
 
 
+from optparse import OptionParser
 
 
-#---
-# get_home_path_os: from os.sys.platform()
-#                   find OS name & ret path
-# <http://docs.python.org/2/library/sys.html#sys.platform>
-# TODO fix paths here
-#---
-def get_home_path_os(name):
-    if name.lower() == 'linux2':
-        home = '/home/pr'  # linux
-    elif name.lower() == 'win32':
-        home = 'e:\\'      # windows
-    elif name.lower() == 'darwin':
-        home = False
+# --- cli interface
+def main():
+    """cli entry point"""
+    usage = "usage: %prog [-h] -s"
+    parser = OptionParser(usage)
+    parser.add_option("-v", "--version", dest="version", \
+                      action="store_true",
+                      help="current version")    
+    options, args = parser.parse_args()
+
+    if options.version:
+        print("%s %s %s %s" % ("socsim", 
+                               "0.0.1", 
+                               "2013", 
+                               "(C) Copyright Peter Renshaw"))
+        sys.exit(0)
     else:
-        home = False       # everything else fails (for the moment)
-    return home
+        parser.print_help()  
+
+
+if __name__ == "__main__":
+    main()
 
 
 # vim: ff=unix:ts=4:sw=4:tw=78:noai:expandtab 

@@ -1,0 +1,69 @@
+  name record.txt
+  date 2013AUG07
+  prog @peterrenshaw
+  desc quick tool to CRUD data to json format
+
+
+aim:
+     simple means to add data to file in JSON format
+     without having to hand edit files. 
+
+functions:
+
+* NEW file
+- add meta data
+- clear existing data
+- ? how to choose new record type?
+
+* ADD new records
+- to existing or NEW. 
+
+* DELETE record by name
+- can delete active records, not archived record
+- deletions are tagged with false & not destroyed
+- future: timestamped 
+
+* SAVE store to file
+- needs valid filepath
+- don't have to specify 
++ file extension
++ future: filepath if previously saved
+
+* READ
+- given valid filepath, read records
+- check records are VALID
+
+* VALID
+- check first record & is it in structure we decided?
+
+
+logic:
+     New
+         filepath
+         filename (meta)
+         description (meta)
+         person (meta)
+
+     Add
+         title, data to store
+
+     Convert
+         if is_json then
+             json = converted store from python to json 
+         else
+             py = converted store from json to python
+     Read
+         with valid filepathname
+             read file contents
+         convert json to py
+         if structure valid?
+             assign to store
+         else
+             report curruption
+     Save
+         if data?
+             if filepathname valid:
+                 write data to file
+
+
+vim: ff=unix:ts=4:sw=4:tw=78:noai:expandtab

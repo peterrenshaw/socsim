@@ -28,25 +28,24 @@ import os.path
 import unittest
 
 
-import tools
-import factory
+import socsim.tools
+import socsim.factory
 
 
 class TestIni(unittest.TestCase):
     def setUp(self):
         # os independent home dir
         self.osname = os.sys.platform
-        self.home = tools.get_home_path_os(self.osname)
-        self.basepath = os.path.join('code','socsim','record')
+        self.home = socsim.tools.get_home_path_os(self.osname)
+        self.basepath = os.path.join('code','socsim','tests')
         self.filepathname_fail = os.path.join(self.home, self.basepath,'empty.ini')
         self.filepathname_titleno = os.path.join(self.home,self.basepath,'title_non.ini')
         self.filepathname = os.path.join(self.home, self.basepath,'urls.ini')
 
         # python versions
-        self.pyhv = factory.hex_version()
-
-        self.c = factory.hack_import_configparser(self.pyhv)
-        self.i = factory.Ini(self.pyhv)
+        self.pyhv = socsim.tools.hex_version()
+        self.c = socsim.tools.hack_import_configparser(self.pyhv)
+        self.i = socsim.factory.Ini(self.pyhv)
     def tearDown(self):
         self.i = None
         self.c = None
@@ -58,7 +57,7 @@ class TestIni(unittest.TestCase):
     # ini files
     def test_ini_ok(self):
         """default ini, T"""
-        status = factory.Ini(self.pyhv)
+        status = socsim.factory.Ini(self.pyhv)
         self.assertTrue(status)
     def test_ini_fail(self):
         """default F with no filenamepath set"""

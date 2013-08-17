@@ -33,40 +33,14 @@ import sys
 import collections
 
 
-# --- HACK ALERT --- 
-# hex_version: which version of py are we using?
-def hex_version():
-    """python version in hex"""
-    return '%x' % sys.hexversion
+#import socsim.tools
 
-# hack_import_configparser: difference called in Py2 to Py3
-def hack_import_configparser(pyhv):
-    """
-    In version 2 upwards in python 'import ConfigParser' is used.
-    In version 3 onwards, 'import configparser' is used. Sux!!!
-    """
-    if pyhv >= "30000f0":     # py3
-        import configparser   # look at this *carefully*
-        config = configparser.ConfigParser()
-    elif pyhv > "20000f0":    # py2 
-        import ConfigParser   # look at this *carefully*
-        config = ConfigParser.ConfigParser()
-    else: 
-        # less than py2
-        print("error: python version not able to support configparser :(")
-        print("version: <%s>" % pyhv)
-        sys.exit(1)
-    return config
 
 # ATTENTION:
 # need this to import dynamically, depending on python version
-pyhv = hex_version()
-hack_import_configparser(pyhv)
+#pyhv = socsim.tools.hex_version()
+#socsim.tools.hack_import_configparser(pyhv)
 # ---
-
-
-import record
-
 
 
 #---

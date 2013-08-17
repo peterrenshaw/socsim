@@ -28,39 +28,40 @@ import os.path
 import unittest
 
 
-import tools
-import factory
-import record
+import socsim.tools
+import socsim.factory
+import socsim.record
+
 
 
 class TestFactory(unittest.TestCase):
     def setUp(self):
         # os independent home dir
         self.osname = os.sys.platform
-        self.home = tools.get_home_path_os(self.osname)
-        self.basepath = os.path.join('code','socsim','record')
+        self.home = socsim.tools.get_home_path_os(self.osname)
+        self.basepath = os.path.join('code','socsim','tests')
         self.filepathname_fail = os.path.join(self.home, self.basepath,'empty.ini')
         self.filepathname_titleno = os.path.join(self.home,self.basepath,'title_non.ini')
         self.filepathname = os.path.join(self.home, self.basepath,'urls.ini')
 
         # python versions
-        self.pyhv = factory.hex_version()
+        self.pyhv = socsim.tools.hex_version()
 
         # Ini
         self.ini_title = "Urls"
         self.ini_desc = "description of URL information"
-        self.c = factory.hack_import_configparser(self.pyhv)
-        self.i = factory.Ini(self.pyhv)
+        self.c = socsim.tools.hack_import_configparser(self.pyhv)
+        self.i = socsim.factory.Ini(self.pyhv)
         self.i.read(self.c, self.filepathname)
         self.data = self.i.all()
 
         # record obj
-        self.m = record.Meta(self.ini_title, self.ini_desc)
+        self.m = socsim.record.Meta(self.ini_title, self.ini_desc)
         self.ma = self.m.all()    # Warning: must return all before injection
-        self.r = record.Record(self.ma)
+        self.r = socsim.record.Record(self.ma)
 
         # Factory
-        self.f = factory.Factory(self.data, self.m, self.r)
+        self.f = socsim.factory.Factory(self.data, self.m, self.r)
     def tearDown(self):
         self.f = None
         self.i = None

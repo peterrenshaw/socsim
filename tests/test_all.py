@@ -25,7 +25,6 @@
 import unittest
 
 
-import record
 import test_meta
 import test_record
 import test_tools

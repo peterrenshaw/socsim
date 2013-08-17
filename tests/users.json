@@ -1,0 +1,47 @@
+[
+    {
+        "key": "title",
+        "value": "Ini2JSON"
+    },
+    {
+        "key": "description",
+        "value": "Ini end to end testing. Ini data to JSON"
+    },
+    {
+        "key": "created",
+        "value": "2013AUG171315.41"
+    },
+    {
+        "key": "Peter-Renshaw",
+        "value": [
+            {
+                "key": "title",
+                "value": "Peter-Renshaw"
+            },
+            {
+                "key": "description",
+                "value": false
+            },
+            {
+                "key": "created",
+                "value": "2013AUG171315.41"
+            },
+            {
+                "key": "name",
+                "value": "Peter Renshaw"
+            },
+            {
+                "key": "twitter",
+                "value": "@peterrenshaw"
+            },
+            {
+                "key": "email",
+                "value": "goonmail@netspace.net.au"
+            },
+            {
+                "key": "nick",
+                "value": "pr"
+            }
+        ]
+    }
+]

@@ -35,6 +35,9 @@
 #
 # use:  python hack_ini2json.py -s urls.ini -d $PATH/code/socsom/record/urls.json
 #
+# bug:  python hack_ini2json.py -s users.ini -d users.json FAILS (os.path.isdir)
+#       python hack_ini2json.py -s users.ini -d $HOME/code/socsim/tests/users.json OK
+#
 # copy: copyright (C) 2013 Peter Renshaw
 #===
 
@@ -44,8 +47,11 @@ import os.path
 from optparse import OptionParser
 
 
-import record
-import factory
+import socsim.tools
+from socsim.record import Meta
+from socsim.record import Record
+from socsim.factory import Ini
+from socsim.factory import Factory
 
 
 # --- cli interface
@@ -74,26 +80,28 @@ def main():
             print("destination <%s>" % options.destination)
 
             # lets rock
-            pyversion = factory.hex_version()
-            config = factory.hack_import_configparser(pyversion)
-            ini = factory.Ini(pyversion)
+            pyversion = socsim.tools.hex_version()
+            config = socsim.tools.hack_import_configparser(pyversion)
+            ini = socsim.factory.Ini(pyversion)
             if not ini.read(config, options.source):
-                print("error: factory.Ini has a problem <%s>" % ini_data)
-
+                print("error: factory.Ini has a problem")
+                print("\toptions.source=<%s>" % (options.source))
+                print("\tconfig=<%s>" % config)
+                
             # extract Ini data
             ini_data = ini.all()
             if not ini_data:
-                print("error: could not extract factory.Ini \
-                      from <%s>" % options.source)
+                print("error: can't  xtract factory.Ini <%s>" % 
+                       options.source)
                 sys.exit(1)
 
             # describe meta block
-            meta_description = record.Meta('Ini2JSON',
+            meta_description = socsim.record.Meta('Ini2JSON',
                                            'Ini end to end testing. Ini data to JSON')
 
             # build container, add to factory and build then extact results
-            c = record.Record(meta_description.all())
-            f = factory.Factory(ini_data, meta_description, c)
+            c = socsim.record.Record(meta_description.all())
+            f = socsim.factory.Factory(ini_data, meta_description, c)
             if not f.build():
                 print("error: problem building factory.build")
                 sys.exit(1)
@@ -105,8 +113,8 @@ def main():
                 sys.exit(1)
 
             # convert python to JSON & save
-            json = record.py2json(data)
-            if record.save(options.destination, json):
+            json = socsim.record.py2json(data)
+            if socsim.record.save(options.destination, json):
                 print("saved <%s>" % options.destination)
             else:
                 print("error saving <%s>" % options.destination)

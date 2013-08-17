@@ -26,13 +26,13 @@
 import unittest
 
 
-import record
+import socsim.record
 
 
 class TestRecord(unittest.TestCase):
     def setUp(self):
-        self.m = record.Meta("meta test", "this is a test of meta data")
-        self.r = record.Record(self.m.all())
+        self.m = socsim.record.Meta("meta test", "this is a test of meta data")
+        self.r = socsim.record.Record(self.m.all())
     def tearDown(self):
         self.m = None
         self.r = None
@@ -49,12 +49,12 @@ class TestRecord(unittest.TestCase):
     # obj.status check
     def test_init_fail(self):
         """inject non list ie: self.m instead of self.m.all()"""
-        self.r = record.Record(self.m)
+        self.r = socsim.record.Record(self.m)
         self.assertFalse(self.r.status())
     # new
     def test_new(self):
         """test new ok"""
-        md = record.Meta("new meta", "this a new meta")
+        md = socsim.record.Meta("new meta", "this a new meta")
         metadata = md.all()
         status = self.r.new(metadata)
         md = None

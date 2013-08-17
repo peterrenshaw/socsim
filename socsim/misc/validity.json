@@ -1,0 +1,74 @@
+[
+    {
+        "key": "title",
+        "value": "Emergency services"
+    },
+    {
+        "key": "description",
+        "value": "List of emergencey services information"
+    },
+    {
+        "key": "created",
+        "value": "2013AUG0913:56"
+    },
+    {
+        "deleted": false,
+        "key": "vicpolice",
+        "value": [
+            {
+                "key": "title",
+                "value": "Victorian Police"
+            },
+            {
+                "key": "description",
+                "value": "Information related to Victorian Police"
+            },
+            {
+                "key": "created",
+                "value": "2013AUG0913:56"
+            },
+            {
+                "key": "phone",
+                "value": "000"
+            },
+            {
+                "key": "web",
+                "value": "http://vicpolice.gov.au/"
+            },
+            {
+                "key": "contact",
+                "value": "title, firstname, lastname"
+            }
+        ]
+    },
+    {
+        "deleted": false,
+        "key": "cfa",
+        "value": [
+            {
+                "key": "title",
+                "value": "Country Fire Authority"
+            },
+            {
+                "key": "description",
+                "value": "Information related to CFA"
+            },
+            {
+                "key": "created",
+                "value": "2013AUG0913:56"
+            },
+            {
+                "key": "phone",
+                "value": "000"
+            },
+            {
+                "key": "www",
+                "value": "http://cfa.vic.gov.au"
+            },
+            {
+                "key": "contact",
+                "value": "title, lastname, firtname"
+            }
+        ]
+    }
+]

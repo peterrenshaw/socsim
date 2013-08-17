@@ -23,19 +23,20 @@
 # date: 2013AUG10
 # prog: pr
 # desc: input data from ini, export to meta & record
+#
+# use: python hack_blocks.py -t "Testing" 
+#                            -d "A test after I've changed the source tree" 
+#                            -s $HOME/block.json
+#
 # copy: copyright (C) 2013 Peter Renshaw
 #===
-
-
-#!/usr/bin/env python
-# ~*~ encoding: utf-8 ~*~
 
 
 import sys
 from optparse import OptionParser
 
 
-import record
+import socsim.record
 
 
 def main():
@@ -57,24 +58,25 @@ def main():
         print("%s v%s %s %s" % ('blocks', '0.0.1', '2013AUG09', '(C) 2013'))
         sys.exit(0)
     elif options.title and options.description:
-        mvp = record.Meta('Victorian Police', 'Information related to Victorian Police')
+        mvp = socsim.record.Meta('Victorian Police', 'Information related to Victorian Police')
         mvp.add('phone','000')
         mvp.add('web', 'http://vicpolice.gov.au/')
         mvp.add('contact', 'title, firstname, lastname')
 
-        mcfa = record.Meta("Country Fire Authority", "Information related to CFA")
+        mcfa = socsim.record.Meta("Country Fire Authority", "Information related to CFA")
         mcfa.add('phone','000')
         mcfa.add('www', 'http://cfa.vic.gov.au')
         mcfa.add('contact', 'title, lastname, firtname')
 
-        md = record.Meta("Emergency services", "List of emergencey services information")
+        md = socsim.record.Meta("Emergency services", "List of emergencey services information")
 
-        me = record.Record(md.all())
+        me = socsim.record.Record(md.all())
         me.add('vicpolice', mvp.all())
         me.add('cfa', mcfa.all())
+
         if options.save: 
-            json = record.py2json(me.all())
-            if record.save(options.save, json):
+            json = socsim.record.py2json(me.all())
+            if socsim.record.save(options.save, json):
                 print("save %s" % options.save)
             else:
                 print("error saving %s" % options.save)

@@ -1,0 +1,33 @@
+2013AUG10
+
+
+abstract
+
+    thinking into building info input, manuip and display
+    tool for data
+
+
+design descions
+
+* should blocks be built from files or interactive?
+- import from file & modify interactive?
+
+* how should important data be entered?
+- files
+- interactive
+- online?
+
+* how do you group data?
+- files
+- online?
+
+* what period of validation should happen?
+- what mechanism should be used?
+
+* reports
+- how to show as dashboard?
+
+* display
+- formats
+- devices
+
