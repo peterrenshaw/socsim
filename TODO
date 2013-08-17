@@ -1,0 +1,59 @@
+                                _          
+     _____ ____   _____  _____ (_)____ ___ 
+    / ___// __ \ / ___/ / ___// // __ `__ \
+   (__  )/ /_/ // /__  (__  )/ // / / / / /
+  /____/ \____/ \___/ /____//_//_/ /_/ /_/ [1]
+
+
+  name todo.txt
+  date 2013AUG06
+  prog @peterrenshaw
+  desc SOCSIM: A scenario simulation tool for social media.
+
+
+outstanding
+* [] build better version in JavaScript
+* [] create html interface using Angular
+
+2013AUG17
+* [x] python install script
+* [x] rebuild code layout
+* [x] test, hack code layout
+
+2013AUG15
+* [x] build factory.Factory
+* [x] fix hacked code
+* [x] write story on factory process, ini->JSON
+
+2013AUG12
+* [x] build factory, ini & test code
+- factory.Ini
+- factory.Ini.read
+- test_ini
+
+2013AUG11
+* [x] example with cli input to build, save (.ini)
+* [x] read existing file, edit (.ini)
+
+2013AUG10
+* [x] complete testing against record/record.py
+* [x] basic testing against record/record.py
+* [x] work on record/Record search
+
+2013AUG09
+* [x] add license
+- <https://www.gnu.org/licenses/gpl-3.0.txt>
+
+
+2013AUG06
+* [x] look at wikis that don't use RMDB for storage
+* [x] converter code JSON <=> python => formats
+
+
+[1] Title created with an ASCII text generator using 'slant' and 'stretch=Yes". 
+The code is based on Figlet which can be found here ~ <http://www.figlet.org/>
+[Last accessed: Sunday 4th August, 2013]
+<http://www.network-science.de/ascii/>
+
+
+# vim: ff=unix:ts=4:sw=4:tw=78:noai:expandtab

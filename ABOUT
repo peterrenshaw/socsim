@@ -1,0 +1,116 @@
+                                  _          
+       _____ ____   _____  _____ (_)____ ___ 
+      / ___// __ \ / ___/ / ___// // __ `__ \
+     (__  )/ /_/ // /__  (__  )/ // / / / / /
+    /____/ \____/ \___/ /____//_//_/ /_/ /_/ [1] 
+
+
+  name ABOUT.txt
+  date 2013AUG04
+  prog @peterrenshaw
+  desc SOCSIM: A simulation tool for social media to test against.
+
+
+Abstract
+
+A tool to play scenario games in real time, communicating with an 
+audience using twitter as a communications tool to send and receive.
+
+
+Why?
+
+The idea behind SOCSIM is to be able to use a simple tool to test ideas 
+against users in the social media sphere as a controlled experiment. 
+
+
+What it is not
+
+This is an idea, not code... yet. A future objective might be to create a
+scenario plan engine that reads plans then tweets the output, sucking up 
+responses and processing results.
+
+
+Explained quickly
+
+Imagine you want to see how people react with real time events on social 
+media? Do you wait for a real event to happen to see what the response is? You 
+could do this. What about creating an exercise that participants join in on
+and contribute in real time to solve a puzzle or problem?
+
+How this might work:
+
+* A controller, a person or group of people decide to create a scenario to 
+  test an idea. A time limit is set and the bounds of the idea to explore are noted.
+
+* Participants are notified of a name, a time a URL to follow and specific instructions
+  to highlight this exercise. 
+
+* Participants are then given an objective and some some upfront information on 
+  the twitter channel. It is up to them to respond according to what they think is 
+  appropriate response by tweeting the info back to the controller.
+
+* As the scenario moves along, subtle or random information to further test 
+  responses.
+
+* The controller then ends the exercise, extracts the information from the twitter replies.
+
+* The information is analysed depending on the original experiment.
+
+* The results published.
+
+
+Applications
+
+To be updated.
+
+
+Requirements
+
+At the moment not much. A twitter account, knowledge of running a scenario
+and a block of time.
+
+
+Key words:
+
+* scenario
+- a fictional or non fictional series of events and responses over a set 
+  period of time. 
+
+* controller
+- Person or persons who set-up the scenario, then run the experiment on users.
+
+* users
+- operators of social media accoutns that you want to test against.
+
+* time
+- a period of time a scenario is run.
+- best be short
+- 5, 10, 15, 30 minute intervals
+
+* fog
+- things that you can't see or imagine that influence the scenario, users and/or controllers
+
+* analysis
+- the results you get back can be analysed to see if your original idea is valid or can be improved 
+  on.
+
+
+Usage
+
+More to come.
+
+
+License
+
+Moving towards open source.
+
+
+Resources
+
+[1] Title created with an ASCII text generator using 'slant' and 'stretch=Yes". 
+The code is based on Figlet which can be found here ~ <http://www.figlet.org/>
+[Last accessed: Sunday 4th August, 2013]
+<http://www.network-science.de/ascii/>
+
+
+# vim: ff=unix:ts=4:sw=4:tw=78:noai:expandtab
